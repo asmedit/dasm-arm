@@ -76,6 +76,8 @@ A64 Opcodes Table
 | 25 | x 0 1 1 0 0 1 1 0 n | immr8       | imms6         | Rn        | Rd        | % C6.2.029 BFI Wd, Wn, #lsb, #width
 | 26 | x 0 1 1 0 0 1 1 0 n | immr8       | imms6         | Rn        | Rd        | % C6.2.030 BFM Wd, Wm, #immr8, #imms6
 | 27 | x 0 1 1 0 0 1 1 0 n | immr8       | imms6         | Rn        | Rd        | % C6.2.031 BFXIL Wd, Wm, #immr8, #imms6
+| 28 | x 0 0 0 1 0 1 0 s s 1 | Rm        | imm6          | Rn        | Rd        | % C6.2.032 BIC Wd, Wn, Wm{, shift #amount}
+
 
 
 

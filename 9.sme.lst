@@ -21,18 +21,18 @@ SME Instruction Format
 SME Opcodes Table
 -----------------
 
-| 01 | 1 1 0 0 0 0 0 0 1 0 0 | 1 0 0 0 0 | m | m m n n n | Zn        | 0 0 0 a a | % C9.2.001 ADDHA Za.S, #Pn, #Pm, Zn.S
-| 02 | 1 1 0 0 0 0 0 0 1 1 0 | 1 0 0 0 0 | m | m m n n n | Zn        | 0 0 a a a | % C9.2.001 ADDHA Za.D, #Pn, #Pm, Zn.D
+| 01 | 1 1 0 0 0 0 0 0 1 0 0 | 1 0 0 0 0 | m | m m n n n | Zn        | 0 0 0 a a | % C9.2.001 ADDHA ZAt.S, #Pn, #Pm, Zn.S
+| 02 | 1 1 0 0 0 0 0 0 1 1 0 | 1 0 0 0 0 | m | m m n n n | Zn        | 0 0 a a a | % C9.2.001 ADDHA ZAt.D, #Pn, #Pm, Zn.D
 | 03 | 0 0 0 0 0 1 0 0 0 1 1 | Rn        | 0 | 1 0 1 1 | imm6        | Rd        | % C9.2.002 ADDSPL Xd|SP, Xn|SP, #imm
 | 04 | 0 0 0 0 0 1 0 0 0 0 1 | Rn        | 0 | 1 0 1 1 | imm6        | Rd        | % C9.2.003 ADDSVL Xd|SP, Xn|SP, #imm
-| 05 | 1 1 0 0 0 0 0 0 1 0 0 | 1 0 0 0 1 | m | m m n n n | Zn        | 0 0 0 a a | % C9.2.004 ADDVA Zd.S, #Pn, #Pm, Zm.S
-| 05 | 1 1 0 0 0 0 0 0 1 1 0 | 1 0 0 0 1 | m | m m n n n | Zn        | 0 0 0 a a | % C9.2.004 ADDVA Zd.D, #Pn, #Pm, Zm.D
-| 06 | 1 0 0 0 0 0 0 1 1 0 0 | Zm        | m | m m n n n | Zn        | 0 0 0 a a | % C9.2.005 BFMOPA Za.S, #Pn, #Pm, Zn.H, Zm.H
-| 07 | 1 0 0 0 0 0 0 1 1 0 0 | Zm        | m | m m n n n | Zn        | 1 0 0 a a | % C9.2.006 BFMOPS Za.S, #Pn, #Pm, Zn.H, Zm.H
-| 08 | 1 0 0 0 0 0 0 0 1 0 0 | Zm        | m | m m n n n | Zn        | 0 0 0 a a | % C9.2.007 FMOPA Za.S, #Pn, #Pm, Zn.S, Zm.S
-| 09 | 1 0 0 0 0 0 0 1 1 0 1 | Zm        | m | m m n n n | Zn        | 0 0 0 a a | % C9.2.008 FMOPA Za.S, #Pn, #Pm, Zn.H, Zm.H
-| 0A | 1 0 0 0 0 0 0 0 1 0 0 | Zm        | m | m m n n n | Zn        | 1 0 0 a a | % C9.2.009 FMOPS Za.S, #Pn, #Pm, Zn.S, Zm.S
-| 0B | 1 0 0 0 0 0 0 1 1 0 1 | Zm        | m | m m n n n | Zn        | 1 0 0 a a | % C9.2.010 FMOPS Za.S, #Pn, #Pm, Zn.H, Zm.H
+| 05 | 1 1 0 0 0 0 0 0 1 0 0 | 1 0 0 0 1 | m | m m n n n | Zn        | 0 0 0 a a | % C9.2.004 ADDVA ZAt.S, #Pn, #Pm, Zm.S
+| 05 | 1 1 0 0 0 0 0 0 1 1 0 | 1 0 0 0 1 | m | m m n n n | Zn        | 0 0 0 a a | % C9.2.004 ADDVA ZAt.D, #Pn, #Pm, Zm.D
+| 06 | 1 0 0 0 0 0 0 1 1 0 0 | Zm        | m | m m n n n | Zn        | 0 0 0 a a | % C9.2.005 BFMOPA ZAt.S, #Pn, #Pm, Zn.H, Zm.H
+| 07 | 1 0 0 0 0 0 0 1 1 0 0 | Zm        | m | m m n n n | Zn        | 1 0 0 a a | % C9.2.006 BFMOPS ZAt.S, #Pn, #Pm, Zn.H, Zm.H
+| 08 | 1 0 0 0 0 0 0 0 1 0 0 | Zm        | m | m m n n n | Zn        | 0 0 0 a a | % C9.2.007 FMOPA ZAt.S, #Pn, #Pm, Zn.S, Zm.S
+| 09 | 1 0 0 0 0 0 0 1 1 0 1 | Zm        | m | m m n n n | Zn        | 0 0 0 a a | % C9.2.008 FMOPA ZAt.S, #Pn, #Pm, Zn.H, Zm.H
+| 0A | 1 0 0 0 0 0 0 0 1 0 0 | Zm        | m | m m n n n | Zn        | 1 0 0 a a | % C9.2.009 FMOPS ZAt.S, #Pn, #Pm, Zn.S, Zm.S
+| 0B | 1 0 0 0 0 0 0 1 1 0 1 | Zm        | m | m m n n n | Zn        | 1 0 0 a a | % C9.2.010 FMOPS ZAt.S, #Pn, #Pm, Zn.H, Zm.H
 | 0C | 1 1 1 0 0 0 0 0 0 0 0 | Rm        | V | s s g g g | Rn        | 0 i i i i | % C9.2.011 LD1B ZA0.H|V.B [Ws, #imm], #Pg/Z, [Xn|SP{, Xm}]
 | 0D | 1 1 1 0 0 0 0 0 1 1 0 | Rm        | V | s s g g g | Rn        | 0 a a a i | % C9.2.012 LD1D ZAt.H|V.D [Ws, #imm], #Pg/Z, [Xn|SP{, Xm, LSL #3}]
 | 0E | 1 1 1 0 0 0 0 0 0 1 0 | Rm        | V | s s g g g | Rn        | 0 a i i i | % C9.2.013 LD1H ZAt.H|V.H [Ws, #imm], #Pg/Z, [Xn|SP{, Xm, LSL #1}]

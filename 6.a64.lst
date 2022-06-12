@@ -46,14 +46,14 @@ A64 Opcodes Table
 | 01 | x 0 0 1 1 0 1 0 0 0 0 | Rm        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.001 ADC Wd, Wn, Wm
 | 02 | x 0 1 1 1 0 1 0 0 0 0 | Rm        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.002 ADCS
 | 03 | x 0 0 0 1 0 1 1 0 0 1 | Rm        | o | o o | im3 | Rn        | Rd        | % C6.2.003 ADD Wd|WSP, Wn|WSP, Wm{, extend #amount}
-| 04 | x 0 0 1 0 0 0 1 0 s | imm12                       | Rn        | Rd        | % C6.2.004 ADD Ws|WSP, Wn|WSP, #imm12{, shift}
+| 04 | x 0 0 1 0 0 0 1 0 s | imm12                       | Rn        | Rd        | % C6.2.004 ADD Ws|WSP, Wn|WSP, #imm{, shift}
 | 05 | x 0 0 0 1 0 1 1 s s 0 | Rm        | imm6          | Rn        | Rd        | % C6.2.005 ADD Wd, Wn{, shift #amount}
 | 06 | x 0 1 0 1 0 1 1 0 0 | uimm6       | 0 | 0 | uimm4 | Xn        | Xd        | % C6.2.006 ADDG Xd|SP, Xn|SP, #uimm6, #uimm4
 | 07 | x 0 1 0 1 0 1 1 0 0 1 | Rm        | o | o o | im3 | Rn        | Rd        | % C6.2.007 ADDS Wd, Wm|WSP{, extend #amount}
-| 08 | x 0 1 1 0 0 0 1 0 s | imm12                       | Rn        | Rd        | % C6.2.008 ADDS Wd, Wn|WSP, #imm12{, shift}
+| 08 | x 0 1 1 0 0 0 1 0 s | imm12                       | Rn        | Rd        | % C6.2.008 ADDS Wd, Wn|WSP, #imm{, shift}
 | 09 | x 0 1 0 1 0 1 1 s s 0 | Rm        | imm6          | Rn        | Rd        | % C6.2.009 ADR Wd, Wm, Wm{, shift #amount}
-| 0A | 0 l o 1 0 0 0 0 | immhi19                                     | Rd        | % C6.2.010 ADR Xd, #imm21
-| 0B | 1 l o 1 0 0 0 0 | immhi19                                     | Rd        | % C6.2.011 ADRP Xd, #imm21
+| 0A | 0 l o 1 0 0 0 0 | immhi19                                     | Rd        | % C6.2.010 ADR Xd, #imm
+| 0B | 1 l o 1 0 0 0 0 | immhi19                                     | Rd        | % C6.2.011 ADRP Xd, #imm
 | 0C | x 0 0 1 0 0 1 0 0 n | immr8       | imms6         | Rn        | Rd        | % C6.2.012 AND Wd|WSP, Wn, #imm
 | 0D | x 0 0 0 1 0 1 0 s s 0 | Rm        | imm6          | Rn        | Rd        | % C6.2.013 AND Wd, Wn, Wm{, shift #amount}
 | 0E | x 1 1 0 1 0 1 0 0 n | immr8       | imms6         | Rn        | Rd        | % C6.2.014 ANDS Wd, Wn, Wm, #imm
@@ -62,23 +62,36 @@ A64 Opcodes Table
 | 11 | x 0 0 1 0 0 1 1 0 N | immr8       | x | 1 1 1 1 1 | Rn        | Rd        | % C6.2.017 ASR Wd, Wn, #shift
 | 12 | x 0 0 1 1 0 1 0 1 1 0 | Rm        | 0 | 0 1 0 1 0 | Rn        | Rd        | % C6.2.018 ASRV Wd, Wn, Wm
 | 13 | 1 1 0 1 0 1 0 1 1 0 0 | 0 1 | op1 | 0 | 1 1 1 1 0 | 0 x | op2 | Rt        | % C6.2.019 AT op, Xt
-| 14 | 1 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 1 | 0 | 0 Z 1 1 0 | Rn        | Rd        | % C6.2.020 AUTDA Xd, Xn|SP / AUTDZA Xd
-| 15 | 1 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 1 | 0 | 0 Z 1 1 1 | Rn        | Rd        | % C6.2.021 AUTDB Xd, Xn|SP / AUTDZB Xd
-| 16 | 1 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 1 | 0 | 0 Z 1 0 0 | Rn        | Rd        | % C6.2.022 AUTIA Xd, Xn|SP / AUTIZA Xd
-| 17 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | x 1 1 0 x | 1 1 1 1 1 | % C6.2.022 AUTIA1716 / AUTIASP / AUTIAZ
-| 18 | 1 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 1 | 0 | 0 Z 1 0 1 | Rn        | Rd      1 | % C6.2.023 AUTIB Xd, Xn|SP / AUTIZB Xd
-| 19 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | x 1 1 1 x | 1 1 1 1 1 | % C6.2.023 AUTIB1716 / AUTIBSP / AUTIBZ
-| 20 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 0 0 | 0 | 1 0 0 0 0 | 0 0 0 1 0 | 1 1 1 1 1 | % C6.2.024 AXFLAG
-| 21 | 0 0 0 1 0 1 | imm26                                                       | % C6.2.025 B #imm26
-| 22 | 0 1 0 1 0 1 0 0 | imm19                                       | 0 | cond  | % C6.2.026 B.cond #imm21
-| 23 | 0 1 0 1 0 1 0 0 | imm19                                       | 1 | cond  | % C6.2.027 BC.cond #imm21
-| 24 | x 0 1 1 0 0 1 1 0 n | immr8       | imms6         | 1 1 1 1 1 | Rd        | % C6.2.028 BFC Wd, #lsb, #width
-| 25 | x 0 1 1 0 0 1 1 0 n | immr8       | imms6         | Rn        | Rd        | % C6.2.029 BFI Wd, Wn, #lsb, #width
-| 26 | x 0 1 1 0 0 1 1 0 n | immr8       | imms6         | Rn        | Rd        | % C6.2.030 BFM Wd, Wm, #immr8, #imms6
-| 27 | x 0 1 1 0 0 1 1 0 n | immr8       | imms6         | Rn        | Rd        | % C6.2.031 BFXIL Wd, Wm, #immr8, #imms6
-| 28 | x 0 0 0 1 0 1 0 s s 1 | Rm        | imm6          | Rn        | Rd        | % C6.2.032 BIC Wd, Wn, Wm{, shift #amount}
-
-
+| 14 | 1 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 1 | 0 | 0 Z 1 1 0 | Rn        | Rd        | % C6.2.020 AUTDA Xd, Xn|SP, AUTDZA Xd
+| 15 | 1 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 1 | 0 | 0 Z 1 1 1 | Rn        | Rd        | % C6.2.021 AUTDB Xd, Xn|SP, AUTDZB Xd
+| 16 | 1 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 1 | 0 | 0 Z 1 0 0 | Rn        | Rd        | % C6.2.022 AUTIA Xd, Xn|SP, AUTIZA Xd
+| 17 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | x 1 1 0 x | 1 1 1 1 1 | % C6.2.022 AUTIA1716/AUTIASP/AUTIAZ
+| 18 | 1 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 1 | 0 | 0 Z 1 0 1 | Rn        | Rd      1 | % C6.2.023 AUTIB Xd, Xn|SP, AUTIZB Xd
+| 19 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | x 1 1 1 x | 1 1 1 1 1 | % C6.2.023 AUTIB1716/AUTIBSP/AUTIBZ
+| 1A | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 0 0 | 0 | 1 0 0 0 0 | 0 0 0 1 0 | 1 1 1 1 1 | % C6.2.024 AXFLAG
+| 1B | 0 0 0 1 0 1 | imm26                                                       | % C6.2.025 B #imm
+| 1C | 0 1 0 1 0 1 0 0 | imm19                                       | 0 | cond  | % C6.2.026 B.cond #imm
+| 1D | 0 1 0 1 0 1 0 0 | imm19                                       | 1 | cond  | % C6.2.027 BC.cond #imm
+| 1E | x 0 1 1 0 0 1 1 0 n | immr8       | imms6         | 1 1 1 1 1 | Rd        | % C6.2.028 BFC Wd, #lsb, #width
+| 1F | x 0 1 1 0 0 1 1 0 n | immr8       | imms6         | Rn        | Rd        | % C6.2.029 BFI Wd, Wn, #lsb, #width
+| 20 | x 0 1 1 0 0 1 1 0 n | immr8       | imms6         | Rn        | Rd        | % C6.2.030 BFM Wd, Wm, #immr8, #imms6
+| 21 | x 0 1 1 0 0 1 1 0 n | immr8       | imms6         | Rn        | Rd        | % C6.2.031 BFXIL Wd, Wm, #immr8, #imms6
+| 22 | x 0 0 0 1 0 1 0 s s 1 | Rm        | imm6          | Rn        | Rd        | % C6.2.032 BIC Wd, Wn, Wm{, shift #amount}
+| 23 | x 1 1 0 1 0 1 0 s s 1 | Rm        | imm6          | Rn        | Rd        | % C6.2.033 BICS Wd, Wn, Wm{, shift #amount}
+| 24 | 1 0 0 1 0 1 | imm26                                                       | % C6.2.034 BL #imm
+| 25 | 1 1 0 1 0 1 1 0 0 0 1 | 1 1 1 1 1 | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.035 BLR Xn
+| 26 | 1 1 0 1 0 1 1 Z 0 0 1 | 1 1 1 1 1 | 0 | 0 0 0 1 M | Rn        | Rm        | % C6.2.036 BLRAAZ/BLRABZ Xn, BLRAA/BLRAB Xn, Xm|SP
+| 27 | 1 1 0 1 0 1 1 0 0 0 0 | 1 1 1 1 1 | 0 | 0 0 0 0 0 | Rn        | 0 0 0 0 0 | % C6.2.037 BR Xn
+| 28 | 1 1 0 1 0 1 1 Z 0 0 0 | 1 1 1 1 1 | 0 | 0 0 0 1 M | Rn        | Rm        | % C6.2.038 BRAAZ/BRABZ Xn, BRAA/BRAB Xn, Xm|SP
+| 29 | 1 1 0 1 0 1 0 1 0 0 0 | 0 1 0 0 1 | 0 | 1 1 1 0 0 | 1 0 | op2 | Rt      1 | % C6.2.039 BRB #op{, Xt}
+| 2A | 1 1 0 1 0 1 0 0 0 0 1 | imm16                                 | 0 0 0 0 0 | % C6.2.040 BRK #imm
+| 2B | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 1 | 0 0 x x 0 | 1 1 1 1 1 | % C6.2.041 BTI {targets}
+| 2C | 0 0 0 0 1 0 0 0 1 L 1 | Rs        | o | 1 1 1 1 1 | Rn        | Rd        | % C6.2.042 CASAB/CASALB/CASB/CASLB Ws, Wt, [Xn|SP{, #0}]
+| 2D | 0 1 0 0 1 0 0 0 1 L 1 | Rs        | o | 1 1 1 1 1 | Rn        | Rd        | % C6.2.043 CASAH/CASALH/CASH/CASLH Ws, Wt, [Xn|SP{, #0}]
+| 2E | 0 x 0 0 1 0 0 0 0 L 1 | Rs        | o | 1 1 1 1 1 | Rn        | Rd        | % C6.2.044 CASP/CASPA/CASPAL/CASPL Ws, Ws+1, Wt, [Xn|SP{, #0}]
+| 2F | 1 x 0 0 1 0 0 0 1 L 1 | Rs        | o | 1 1 1 1 1 | Rn        | Rd        | % C6.2.045 CAS/CASA/CASAL/CASL Ws, Wt, [Xn|SP{, #0}]
+| 30 | x 0 1 1 0 1 0 1 | imm19                                       | Rt        | % C6.2.046 CNBZ Xt, #imm
+| 31 | x 0 1 1 0 1 0 0 | imm19                                       | Rt        | % C6.2.047 CBZ Xt, #imm
 
 
  0 x 0 0 1 0 0 0 0 0 0 % C6.2.286 STXRB

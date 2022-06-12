@@ -18,13 +18,6 @@ A64 Instruction Format
 
  +---------------------= 32/64-bit
  |
- |     +-+-+-+---------= Opcode
- |     0 0 0 0 --------= SME
- |     0 0 1 0 --------= SVE
- |     1 0 0 x --------= Data Processing Immediate
- |     1 0 1 x --------= Branching, System, Exceptions
- |     x 1 x 0 --------= Loads and Stores
- |     x 1 0 1 --------= Data Processing Register
  |     1 1 1 1 --------= NEON Scalar
  |     0 1 1 1 --------= NEON Vector
  |     | | | |

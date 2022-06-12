@@ -16,18 +16,17 @@ SVE:  Z0-Z31     -- SVE registers (2047..0, ..., 127..0: Qn, 63..0: Dn, 31..0: S
 A64 Instruction Format
 ----------------------
 
- +---------------------= 32/64-bit |
+ +---------------------= 32/64-bit
  |
  |     +-+-+-+---------= Opcode
- |     0 0 0 0 --------= UDF
- |     0 0 0 1 --------= N/A
- |     0 0 1 x --------= N/A
+ |     0 0 0 0 --------= SME
+ |     0 0 1 0 --------= SVE
  |     1 0 0 x --------= Data Processing Immediate
  |     1 0 1 x --------= Branching, System, Exceptions
  |     x 1 x 0 --------= Loads and Stores
  |     x 1 0 1 --------= Data Processing Register
- |     0 1 1 1 --------= Data Processing Vector FPU/SIMD
- |     1 1 1 1 --------= Data Processing Scalar FPU/SIMD
+ |     1 1 1 1 --------= NEON Scalar
+ |     0 1 1 1 --------= NEON Vector
  |     | | | |
  |     | | | |
  7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0
@@ -38,7 +37,7 @@ A64 Instruction Format
 NEON FPU/SIMD Instruction Format
 --------------------------------
 
-| No |                31-21  | 20-16: Rm | F | 14-10: Ra  | 9-5: Rn  | 4-0: Rd   |
+| No |                31-21  | 20-16: Rm | F | 14-10: Ra | 9-5: Rn   | 4-0: Rd   | Description
 
 NEON FPU/SIMD Opcodes Table
 ---------------------------

@@ -1,0 +1,50 @@
+A64 Hacking Guide. Part 3
+=========================
+
+A64:  R0-R30     -- general purpose registers (63..0: Xn, 31..0: Wn)
+      R31        -- zero register (63..0)
+      SP         -- stack pointer (63..0)
+      PC         -- program counter (63..0)
+
+NEON: V0-V31     -- FPU/SIMD registers (127..0: Qn, 63..0: Dn, 31..0: Sn, 15..0: Hn, 7..0: Bn)
+      FPCR,FPSR  -- FPU/SIMD status registers (63..0)
+
+SVE:  Z0-Z31     -- SVE registers (2047..0, ..., 127..0: Qn, 63..0: Dn, 31..0: Sn, 15..0: Hn, 7..0: Bn)
+      P0-P15     -- SVE predicate registers (255..0, ..., 15..0)
+      FFR        -- SVE first fault register (63..0)
+
+A64 Instruction Format
+----------------------
+
+ +---------------------= 32/64-bit |
+ |
+ |     +-+-+-+---------= Opcode
+ |     0 0 0 0 --------= UDF
+ |     0 0 0 1 --------= N/A
+ |     0 0 1 x --------= N/A
+ |     1 0 0 x --------= Data Processing Immediate
+ |     1 0 1 x --------= Branching, System, Exceptions
+ |     x 1 x 0 --------= Loads and Stores
+ |     x 1 0 1 --------= Data Processing Register
+ |     x 1 1 1 --------= Data Processing Scalar FPU/SIMD
+ |     | | | |
+ |     | | | |
+ 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0 7 6 5 4 3 2 1 0
+ +-------------+ +-------------+ +-------------+ +-------------+
+ |     MSB     | |             | |             | |     LSB     |
+ +-------------+ +-------------+ +-------------+ +-------------+
+3130292827262524232221201918171615141312111009080706050403020100
+ |     | | | |
+ |     | | | |
+ 1---- 0 0 0 0 --------= SVE
+
+NEON FPU/SIMD Instruction Format
+--------------------------------
+
+| No |                31-21  | 20-16: Rm | F | 14-10: Ra  | 9-5: Rn  | 4-0: Rd   |
+
+NEON FPU/SIMD Opcodes Table
+---------------------------
+
+| 01 | 0 1 0 1 1 1 1 0 s s 1 | 0 0 0 0 0 | 1 | 0 1 1 1 0 | Rn        | Rd        | % C7.2.001 ABS Vd, Vn
+

@@ -48,7 +48,30 @@ op0 op1    op2 op3 op4 Description
 10  1xxxxx -   -   -   N/A
 11  -      -   -   -   SME memory
 
+SME Instruction Format
+----------------------
+
+| No |                31-21  | 20-16: Rm | F | 14-10: Ra | 9-5: Rn   | 4-0: Rd   | Description
+
 SME Opcodes Table
 -----------------
 
+| 01 | 1 1 0 0 0 0 0 0 1 0 0 | 1 0 0 0 0 | m | m m n n n | Zn        | 0 0 0 a a | % C9.2.001 ADDHA Za.S, #Pn, #Pm, Zn.S
+| 02 | 1 1 0 0 0 0 0 0 1 1 0 | 1 0 0 0 0 | m | m m n n n | Zn        | 0 0 a a a | % C9.2.001 ADDHA Za.D, #Pn, #Pm, Zn.D
+| 03 | 0 0 0 0 0 1 0 0 0 1 1 | Rn        | 0 | 1 0 1 1 | imm6        | Rd        | % C9.2.002 ADDSPL Xd|SP, Xn|SP, #imm6
+| 04 | 0 0 0 0 0 1 0 0 0 0 1 | Rn        | 0 | 1 0 1 1 | imm6        | Rd        | % C9.2.003 ADDSVL Xd|SP, Xn|SP, #imm6
+| 05 | 1 1 0 0 0 0 0 0 1 0 0 | 1 0 0 0 1 | m | m m n n n | Zn        | 0 0 0 aa  | % C9.2.004 ADDVA Zd.S, #Pn, #Pm, Zm.S
+| 05 | 1 1 0 0 0 0 0 0 1 1 0 | 1 0 0 0 1 | m | m m n n n | Zn        | 0 0 0 aa  | % C9.2.004 ADDVA Zd.D, #Pn, #Pm, Zm.D
+| 06 | 1 0 0 0 0 0 0 1 1 0 0 | Zm        | m | m m n n n | Zn        | 0 0 0 a a | % C9.2.005 BFMOPA Za.S, #Pn, #Pm, Zn.H, Zm.H
+| 07 | 1 0 0 0 0 0 0 1 1 0 0 | Zm        | m | m m n n n | Zn        | 1 0 0 a a | % C9.2.006 BFMOPS Za.S, #Pn, #Pm, Zn.H, Zm.H
+| 08 | 1 0 0 0 0 0 0 0 1 0 0 | Zm        | m | m m n n n | Zn        | 0 0 0 a a | % C9.2.007 FMOPA Za.S, #Pn, #Pm, Zn.S, Zm.S
+| 09 | 1 0 0 0 0 0 0 1 1 0 1 | Zm        | m | m m n n n | Zn        | 0 0 0 a a | % C9.2.008 FMOPA Za.S, #Pn, #Pm, Zn.H, Zm.H
+| 0A | 1 0 0 0 0 0 0 0 1 0 0 | Zm        | m | m m n n n | Zn        | 1 0 0 a a | % C9.2.009 FMOPS Za.S, #Pn, #Pm, Zn.S, Zm.S
+| 0B | 1 0 0 0 0 0 0 1 1 0 1 | Zm        | m | m m n n n | Zn        | 1 0 0 a a | % C0.2.010 FMOPS Za.S, #Pn, #Pm, Zn.H, Zm.H
+| 0C | 1 1 1 0 0 0 0 0 0 0 0 | Rm        | V | s s g g g | Rn        | 0 | im4   | % C0.2.011 LD1B Ws.B, #Pg/Z, [Xn|SP, Xm]
+| 0D | 1 1 1 0 0 0 0 0 1 1 0 | Rm        | V | s s g g g | Rn        | 0 | a a i | % C0.2.012 LD1D Za.H|V.D [Ws, #i], #Pg/Z, [Xn|SP, Xm, LSL #3]
+| 0E | 1 1 1 0 0 0 0 0 0 1 0 | Rm        | V | s s g g g | Rn        | 0 a | im3 | % C0.2.013 LD1H Za.H|V.H [Ws, #im3], #Pg/Z, [Xn|SP, Xm, LSL #1]
+| 0F | 1 1 1 0 0 0 0 1 1 1 0 | Rm        | V | s s g g g | Rn        | 0 a a a a | % C0.2.014 LD1Q Za.Q|V.Q [Ws], #Pg/Z, [Xn|SP, Xm, LSL #4]
+| 10 | 1 1 1 0 0 0 0 0 1 0 0 | Rm        | V | s s g g g | Rn        | 0 a | im2 | % C0.2.015 LD1W Za.W|V.W [Ws, #im2], #Pg/Z, [Xn|SP, Xm, LSL #2]
+| 11 | 1 1 1 0 0 0 0 0 1 0 0 | Rm        | V | s s g g g | Rn        | 0 a | im2 | % C0.2.015 LDR
 

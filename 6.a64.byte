@@ -45,6 +45,23 @@ A64 Opcodes Table
 -----------------
 
 | 00 | 0 0 0 0 0 0 0 0 0 0 0 | 0 0 0 0 0 | 0 | 0 0 0 0 0 | 0 0 0 0 0 | 0 0 0 0 0 | % C6.2.312 UDF
+| 01 | x 0 0 1 1 0 1 0 0 0 0 | Rm        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.001 ADC Wd, Wn, Wm
+| 02 | x 0 1 1 1 0 1 0 0 0 0 | Rm        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.002 ADCS 
+| 03 | x 0 0 0 1 0 1 1 0 0 1 | Rm        | o | o o | im3 | Rn        | Rd        | % C6.2.003 ADD Wd|WSP, Wn|WSP, Wm{, extend #amount}
+| 04 | x 0 0 1 0 0 0 1 0 s | imm12                       | Rn        | Rd        | % C6.2.004 ADD Ws|WSP, Wn|WSP, #imm12{, shift}
+| 05 | 0 0 0 0 1 0 1 1 s s 0 | Rm        | imm6          | Rn        | Rd        | % C6.2.005 ADD Wd, Wn{, shift #amount}
+| 05 | 1 0 0 0 1 0 1 1 s s 0 | Rm        | imm6          | Rn        | Rd        | % C6.2.005 ADD Xd, Xn{, shift #amount}
+| 06 | x 0 1 0 1 0 1 1 0 0 | uimm6       | 0 | 0 | uimm4 | Xn        | Xd        | % C6.2.006 ADDG Xd|SP, Xn|SP, #uimm6, #uimm4
+| 07 | x 0 1 0 1 0 1 1 0 0 1 | Rm        | o | o o | im3 | Rn        | Rd        | % C6.2.007 ADDS Wd, Wm|WSP{, extend #amount}
+| 08 | x 0 1 1 0 0 0 1 0 s | imm12                       | Rn        | Rd        | % C6.2.008 ADDS Wd, Wn|WSP, #imm12{, shift}
+| 09 | x 0 1 0 1 0 1 1 s s 0 | Rm        | imm6          | Rn        | Rd        | % C6.2.009 ADR Wd, Wm, Wm{, shift #amount}
+| 0A | 0 l o 1 0 0 0 0 | immhi19                                     | Rd        | % C6.2.010 ADR Xd, label
+| 0B | 1 l o 1 0 0 0 0 | immhi19                                     | Rd        | % C6.2.011 ADRP Xd, label
+| 0C | x 0 0 1 0 0 1 0 0 n | immr8       | imms6         | Rn        | Rd        | % C6.2.012 AND Wd|WSP, Wn, #imm
+| 0D | x 0 0 0 1 0 1 0 s s 0 | Rm        | imm6          | Rn        | Rd        | % C6.2.013 AND Wd, Wn, Wm{, shift #amount}
+| 0E | x 1 1 0 1 0 1 0 0 n | immr8       | imms6         | Rn        | Rd        | % C6.2.014 ANDS Wd, Wn, Wm, #imm
+| 0F | x 1 1 0 1 0 1 0 s s 0 | Rm        | imm6          | Rn        | Rd        | % C6.2.015 ANDS Wd, Wn, Wm{, shift #amount}
+
 
  0 x 0 0 1 0 0 0 0 0 0 % C6.2.286 STXRB
                        % C6.2.253 STLXRB
@@ -82,21 +99,15 @@ A64 Opcodes Table
  1 x 0 0 1 0 0 0 1 1 0 % C6.2.100 LDAR
                        % C6.2.115 LDLAR
  1 x 0 0 1 0 0 0 1 i 1 % C6.2.040 CAS, CASA, CASAL, CASL
- x 0 0 0 1 0 1 0 s s 0 % C6.2.012 AND (shifted register)
  x 0 0 0 1 0 1 0 s s 1 % C6.2.029 BIC (shifted register)
  x 0 1 0 1 0 1 0 0 0 0 % C6.2.177 MOV (register)
  x 0 1 0 1 0 1 0 s s 1 % C6.2.186 MVN
                        % C6.2.192 ORN (shifted register)
  x 1 0 0 1 0 1 0 s s 0 % C6.2.078 EOR (shifted register)
  x 1 0 0 1 0 1 0 s s 1 % C6.2.076 EON (shifted register)
- x 1 1 0 1 0 1 0 s s 0 % C6.2.014 ANDS (shifted register)
                        % C6.2.308 TST (shifted register)
  x 1 1 0 1 0 1 0 s s 1 % C6.2.030 BICS (shifted register)
- x 0 0 0 1 0 1 1 0 0 1 % C6.2.001 ADC % C6.2.003 ADD (extended register)
- x 0 0 0 1 0 1 1 s s 0 % C6.2.005 ADD (shifted register)
- x 0 1 0 1 0 1 1 0 0 1 % C6.2.006 ADDS (extended register)
                        % C6.2.53 CMN (extended register)
- x 0 1 0 1 0 1 1 s s 0 % C6.2.008 ADDS (shifted register)
                        % C6.2.55 CMN (shifted register)
  x 1 0 0 1 0 1 1 0 0 1 % C6.2.288 SUB (extended register)
  x 1 0 0 1 0 1 1 s s 0 % C6.2.290 SUB (shifted register)
@@ -105,11 +116,9 @@ A64 Opcodes Table
                        % C6.2.291 SUBS (extended register)
  x 1 1 0 1 0 1 1 s s 0 % C6.2.058 CMP (shifted register)
                        % C6.2.293 SUBS (shifted register) % C6.2.188 NEGS
- x i i 1 0 0 0 0 _ _ _ % C6.2.009 ADR % C6.2.010 ADRP
- x 0 0 1 0 0 0 1 0 s _ % C6.2.004 ADD (immediate)
+
                        % C6.2.173 MOV (to/from SP)
  x 1 0 1 0 0 0 1 0 s _ % C6.2.289 SUB (immediate)
- x 0 1 1 0 0 0 1 0 s _ % C6.2.007 ADDS (immediate)
                        % C6.2.54 CMN (immediate)
  x 1 1 1 0 0 0 1 0 s _ % C6.2.057 CMP (immediate)
                        % C6.2.292 SUBS (immediate)
@@ -318,7 +327,6 @@ A64 Opcodes Table
                        % C6.2.185 MUL
                        % C6.2.172 MNEG
                        % C6.2.184 MSUB
- x 0 1 1 1 0 1 0 0 0 0 % C6.2.002 ADCS
  x 0 1 1 1 0 1 0 0 1 0 % C6.2.043 CCMN (immediate)
                        % C6.2.044 CCMN (register)
  x 0 1 1 1 0 1 0 0 0 0 % C6.2.002 ADCS

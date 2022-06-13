@@ -49,7 +49,7 @@ A64 Opcodes Table
 | 04 | x 0 0 1 0 0 0 1 0 s | imm12                       | Rn        | Rd        | % C6.2.004 ADD Ws|WSP, Wn|WSP, #imm{, shift}
 | 05 | x 0 0 0 1 0 1 1 s s 0 | Rm        | imm6          | Rn        | Rd        | % C6.2.005 ADD Wd, Wn{, shift #amount}
 | 06 | x 0 1 0 1 0 1 1 0 0 | uimm6       | 0 | 0 | uimm4 | Xn        | Xd        | % C6.2.006 ADDG Xd|SP, Xn|SP, #uimm6, #uimm4
-| 07 | x 0 1 0 1 0 1 1 0 0 1 | Rm        | o | o o | im3 | Rn        | Rd        | % C6.2.007 ADDS Wd, Wm|WSP{, extend #amount}
+| 07 | x 0 1 0 1 0 1 1 0 0 1 | Rm        | o | o o | im3 | Rn        | Rd        | % C6.2.007 ADDS Wd, Wm|WSP{, extend #amount} %C6.2.059
 | 08 | x 0 1 1 0 0 0 1 0 s | imm12                       | Rn        | Rd        | % C6.2.008 ADDS Wd, Wn|WSP, #imm{, shift}
 | 09 | x 0 1 0 1 0 1 1 s s 0 | Rm        | imm6          | Rn        | Rd        | % C6.2.009 ADR Wd, Wm, Wm{, shift #amount}
 | 0A | 0 l o 1 0 0 0 0 | immhi19                                     | Rd        | % C6.2.010 ADR Xd, #imm
@@ -92,6 +92,66 @@ A64 Opcodes Table
 | 2F | 1 x 0 0 1 0 0 0 1 L 1 | Rs        | o | 1 1 1 1 1 | Rn        | Rd        | % C6.2.045 CAS/CASA/CASAL/CASL Ws, Wt, [Xn|SP{, #0}]
 | 30 | x 0 1 1 0 1 0 1 | imm19                                       | Rt        | % C6.2.046 CNBZ Xt, #imm
 | 31 | x 0 1 1 0 1 0 0 | imm19                                       | Rt        | % C6.2.047 CBZ Xt, #imm
+| 32 | x 0 1 1 1 0 1 0 0 1 0 | imm5      | c | c c c 1 0 | Rn        | 0 n z c v | % C6.2.048 CCMN Wn, #imm, #nzcv, cond
+| 33 | x 0 1 1 1 0 1 0 0 1 0 | Rm        | c | c c c 0 0 | Rn        | 0 n z c v | % C6.2.049 CCMN Wn, Wm, #nzcv, cond
+| 34 | x 1 1 1 1 0 1 0 0 1 0 | imm5      | c | c c c 1 0 | Rn        | 0 n z c v | % C6.2.050 CCMP Wn, #imm, #nzcv, cond
+| 35 | x 1 1 1 1 0 1 0 0 1 0 | Rm        | c | c c c 0 0 | Rn        | 0 n z c v | % C6.2.051 CCMP Wn, Wm, #nzcv, cond
+| 36 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 0 0 | 0 | 1 0 0 0 0 | 0 0 0 0 0 | 1 1 1 1 1 | % C6.2.052 CFINV
+| 37 | 1 1 0 1 0 1 0 1 0 0 0 | 0 1 0 1 1 | 0 | 1 1 1 0 0 | 1 1 1 0 0 | Rt        | % C6.2.053 CFP RCTX, Xt
+| 38 | x 0 0 1 1 0 1 0 1 0 0 | Rm        | c | c c c 0 1 | Rn        | Rd        | % C6.2.054 CINC Wd, Wn, cond
+| 39 | x 1 0 1 1 0 1 0 1 0 0 | Rm        | c | c c c 0 0 | Rn        | Rd        | % C6.2.055 CINV Wd, Wn, cond
+| 3A | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 1 i i | i i 0 1 0 | 1 1 1 1 1 | % C6.2.056 CLREX {#imm}
+| 3B | x 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 0 | 0 | 0 0 1 0 1 | Rn        | Rd        | % C6.2.057 CLS Wd, Wn
+| 3C | x 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 0 | 0 | 0 0 0 1 0 | Rn        | Rd        | % C6.2.058 CLZ Wd, Wn
+| 3D | x 0 1 0 1 0 1 1 0 0 1 | Rm        | o | o o i i i | Rn        | 1 1 1 1 1 | % C6.2.059 CMN Wn|WSP, Wm{, extend #amount}
+| 3E | x 0 1 1 0 0 0 1 0 s | imm12                       | Rn        | 1 1 1 1 1 | % C6.2.060 CMN Wn|WSP, #imm{, shift #amount}
+| 3F | x 0 1 0 1 0 1 1 s s 0 | Rm        | imm6          | Rn        | 1 1 1 1 1 | % C6.2.061 CMN Wn|WSP, Wm{, shift #amount}
+| 40 | x 1 1 0 1 0 1 1 0 0 1 | Rm        | o | o o i i i | Rn        | 1 1 1 1 1 | % C6.2.062 CMP Wn|WSP, Wm{, extend #amount}
+| 41 | x 1 1 1 0 0 0 1 0 s | imm12                       | Rn        | 1 1 1 1 1 | % C6.2.063 CMP Wn|WSP, #imm{, shift #amount}
+| 42 | x 1 1 0 1 0 1 1 s s 0 | Rm        | imm6          | Rn        | 1 1 1 1 1 | % C6.2.064 CMP Wn|WSP, Wm{, shift #amount}
+| 43 | 1 0 1 1 1 0 1 0 1 1 0 | Xm        | 0 | 0 0 0 0 0 | Xn        | 1 1 1 1 1 | % C6.2.065 CMPP Xn|SP, Xm|SP
+| 44 | x 1 0 1 1 0 1 0 1 0 0 | Rm        | c | c c c 0 1 | Rn        | Rd        | % C6.2.066 CNEG Wd, Wn, cond
+| 45 | 1 1 0 1 0 1 0 1 0 0 0 | 0 1 0 1 1 | 0 | 1 1 1 0 0 | 1 1 1 1 1 | Rt        | % C6.2.067 CPP RCTX, Xt
+| 46 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 0 0 0 0 1 | Rn        | Rd        | % C6.2.068 CPYFE/CPYFM/CPYFP [Xd]!, [Xs]!, Xn!
+| 47 | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 1 0 0 0 1 | Rn        | Rd        | % C6.2.069 CPYFEN/CPYFMN/CPYFPN [Xd]!, [Xs]!, Xn!
+| 48 | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 0 0 0 0 1 | Rn        | Rd        | % C6.2.070 CPYFERN/CPYFMRN/CPYFPRN [Xd]!, [Xs]!, Xn!
+| 49 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 0 1 0 0 1 | Rn        | Rd        | % C6.2.071 CPYFERT/CPYFMRT/CPYFPRT [Xd]!, [Xs]!, Xn!
+| 4A | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 1 1 0 0 1 | Rn        | Rd        | % C6.2.072 CPYFERTN/CPYFMRTN/CPYFPRTN [Xd]!, [Xs]!, Xn!
+| 4B | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 0 1 0 0 1 | Rn        | Rd        | % C6.2.073 CPYFERTRN/CPYFMRTRN/CPYFPRTRN [Xd]!, [Xs]!, Xn!
+| 4C | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 1 1 0 0 1 | Rn        | Rd        | % C6.2.074 CPYFERTWN/CPYFMRTWN/CPYFPRTWN [Xd]!, [Xs]!, Xn!
+| 4D | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 0 1 1 0 1 | Rn        | Rd        | % C6.2.075 CPYFET/CPYFMT/CPYFPT [Xd]!, [Xs]!, Xn!
+| 4E | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 1 1 1 0 1 | Rn        | Rd        | % C6.2.076 CPYFETN/CPYFMTN/CPYFMTN [Xd]!, [Xs]!, Xn!
+| 4F | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 0 1 1 0 1 | Rn        | Rd        | % C6.2.077 CPYFETRN/CPYFMTRN/CPYFPTRN [Xd]!, [Xs]!, Xn!
+| 50 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 1 1 1 0 1 | Rn        | Rd        | % C6.2.078 CPYFETWN/CPYFMTWN/CPYFPTWN [Xd]!, [Xs]!, Xn!
+| 51 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 1 0 0 0 1 | Rn        | Rd        | % C6.2.079 CPYFEWN/CPYFMWN/CPYFPWN [Xd]!, [Xs]!, Xn!
+| 52 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 0 0 1 0 1 | Rn        | Rd        | % C6.2.080 CPYFEWT/CPYFMWT/CPYFPWT [Xd]!, [Xs]!, Xn!
+| 53 | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 1 0 1 0 1 | Rn        | Rd        | % C6.2.081 CPYFEWTN/CPYFMWTN/CPYFPWTN [Xd]!, [Xs]!, Xn!
+| 54 | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 0 0 1 0 1 | Rn        | Rd        | % C6.2.082 CPYFEWTRN/CPYFMWTRN/CPYFPWTRN [Xd]!, [Xs]!, Xn!
+| 55 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 1 0 1 0 1 | Rn        | Rd        | % C6.2.083 CPYFEWTWN/CPYFMWTWN/CPYFPWTWN [Xd]!, [Xs]!, Xn!
+| 56 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 0 0 0 0 1 | Rn        | Rd        | % C6.2.084 CPYE/CPYM/CPYP [Xd]!, [Xs]!, Xn!
+| 57 | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 1 0 0 0 1 | Rn        | Rd        | % C6.2.085 CPYEN/CPYMN/CPYPN [Xd]!, [Xs]!, Xn!
+| 58 | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 0 0 0 0 1 | Rn        | Rd        | % C6.2.086 CPYERN/CPYMRN/CPYPRN [Xd]!, [Xs]!, Xn!
+| 59 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 0 1 0 0 1 | Rn        | Rd        | % C6.2.087 CPYERT/CPYMRT/CPYPRT [Xd]!, [Xs]!, Xn!
+| 5A | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 1 1 0 0 1 | Rn        | Rd        | % C6.2.088 CPYERTN/CPYMRTN/CPYPRTN [Xd]!, [Xs]!, Xn!
+| 5B | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 0 1 0 0 1 | Rn        | Rd        | % C6.2.089 CPYERTRN/CPYMRTRN/CPYPRTRN [Xd]!, [Xs]!, Xn!
+| 5C | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 1 1 0 0 1 | Rn        | Rd        | % C6.2.090 CPYERTWN/CPYMRTWN/CPYPRTWN [Xd]!, [Xs]!, Xn!
+| 5D | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 0 1 1 0 1 | Rn        | Rd        | % C6.2.091 CPYET/CPYMT/CPYPT [Xd]!, [Xs]!, Xn!
+| 5E | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 1 1 1 0 1 | Rn        | Rd        | % C6.2.092 CPYETN/CPYMTN/CPYPTN [Xd]!, [Xs]!, Xn!
+| 5F | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 0 1 1 0 1 | Rn        | Rd        | % C6.2.093 CPYETRN/CPYMTRN/CPYPTRN [Xd]!, [Xs]!, Xn!
+| 60 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 1 1 1 0 1 | Rn        | Rd        | % C6.2.094 CPYETWN/CPYMTWN/CPYPTWN [Xd]!, [Xs]!, Xn!
+| 61 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 1 0 0 0 1 | Rn        | Rd        | % C6.2.095 CPYEWN/CPYMWN/CPYPWN [Xd]!, [Xs]!, Xn!
+| 62 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 0 0 1 0 1 | Rn        | Rd        | % C6.2.096 CPYEWT/CPYMWT/CPYPWT [Xd]!, [Xs]!, Xn!
+| 63 | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 1 0 1 0 1 | Rn        | Rd        | % C6.2.097 CPYEWTN/CPYMWTN/CPYPWTN [Xd]!, [Xs]!, Xn!
+| 64 | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 0 0 1 0 1 | Rn        | Rd        | % C6.2.098 CPYEWTRN/CPYMWTRN/CPYPWTRN [Xd]!, [Xs]!, Xn!
+| 65 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 1 0 1 0 1 | Rn        | Rd        | % C6.2.099 CPYEWTWN/CPYMWTWN/CPYPWTWN [Xd]!, [Xs]!, Xn!
+| 66 | x 0 0 1 1 0 1 0 1 1 0 | Rm        | 0 | 1 0 0 s z | Rn        | Rd        | % C6.2.100 CRC32B/CRC32H/CRC32W/CRC32X Wd, Wn, Wm
+| 67 | x 0 0 1 1 0 1 0 1 1 0 | Rm        | 0 | 1 0 1 s z | Rn        | Rd        | % C6.2.101 CRC32CB/CRC32CH/CRC32CW/CRC32CX Wd, Wn, Wm
+| 68 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | 0 0 1 0 0 | 1 1 1 1 1 | % C6.2.102 CSDB
+
+
+
+
+
 
 
  0 x 0 0 1 0 0 0 0 0 0 % C6.2.286 STXRB
@@ -366,7 +426,6 @@ A64 Opcodes Table
  x 1 0 1 1 0 1 0 1 0 0 % C6.2.049 CINV
                        % C6.2.65 CSETM
                        % C6.2.67 CSINV
- x 1 0 1 1 0 1 0 1 0 0 % C6.2.059 CNEG
                        % C6.2.68 CSNEG
  x 1 0 1 1 0 1 0 1 1 0 % C6.2.051 CLS
  x 1 0 1 1 0 1 0 1 1 0 % C6.2.052 CLZ

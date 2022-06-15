@@ -42,7 +42,6 @@ A64 Instruction Format
 A64 Opcodes Table
 -----------------
 
-| 00 | 0 0 0 0 0 0 0 0 0 0 0 | 0 0 0 0 0 | 0 | 0 0 0 0 0 | 0 0 0 0 0 | 0 0 0 0 0 | % C6.2.312 UDF
 | 01 | x 0 0 1 1 0 1 0 0 0 0 | Rm        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.001 ADC Wd, Wn, Wm
 | 02 | x 0 1 1 1 0 1 0 0 0 0 | Rm        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.002 ADCS
 | 03 | x 0 0 0 1 0 1 1 0 0 1 | Rm        | o | o o | im3 | Rn        | Rd        | % C6.2.003 ADD Wd|WSP, Wn|WSP, Wm{, extend #amount}

@@ -18,7 +18,7 @@ Extensions:
 
   NEON, PMULL, FP, FP16, SVE, CRC, LSE, LSE2, RDM, RCPC, RCPC2, DOTPROD, TME, FHM, DIT, FLAGM, FLAGM2, SPE, LOR,
   SSBS, SB, PACA, PACG, DPB, DPB2, SVE2, SVE2-AES, SVE2-SM4, SVE2-SHA3, SVE2-BITPERM, FRINTTS, I8MM, F32MM, F64MM,
-  BF16, RAND, BTI, MTE, JSCONV, FCMA, AES, SHA2, SHA3, SM4, SME, ASM, BRBE, SPECRES, RAS, LS64, LRCPC, LRCPC2
+  BF16, RAND, BTI, MTE, JSCONV, FCMA, AES, SHA2, SHA3, SM4, SME, ASM, BRBE, SPECRES, RAS, LS64, LRCPC, LRCPC2, TRF
 
 A64 Instruction Format
 ----------------------
@@ -213,6 +213,7 @@ A64 Opcodes Table
 | A3 | 0 0 0 0 1 0 0 0 1 1 0 | 1 1 1 1 1 | 0 | 1 1 1 1 1 | Rn        | Rd        | % C6.2.160 LDLARB Wd, [Xn|SP {,#0}] (LOR)
 | A4 | 0 1 0 0 1 0 0 0 1 1 0 | 1 1 1 1 1 | 0 | 1 1 1 1 1 | Rn        | Rd        | % C6.2.161 LDLARH Wd, [Xn|SP {,#0}] (LOR)
 | A5 | 1 x 0 0 1 0 0 0 1 1 0 | 1 1 1 1 1 | 0 | 1 1 1 1 1 | Rn        | Rd        | % C6.2.162 LDLAR Wd, [Xn|SP {,#0}] (LOR)
+|    | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | 0 0 0 0 0 | 1 1 1 1 1 | % C6.2.238 NOP
 |    | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | 1 0 0 0 1 | 1 1 1 1 1 | % C6.2.251 PSB CSYNC (SPE)
 |    | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 1 0 1 | 0 0 1 0 0 | 1 1 1 1 1 | % C6.2.252 PSSBB
 |    | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | 0 0 1 0 0 | 1 1 1 1 1 | % C6.2.280 SEV
@@ -221,5 +222,8 @@ A64 Opcodes Table
 |    | 1 1 0 1 0 1 0 1 0 0 0 | 0 1 | op1 | n | n n n m m | m m | op2 | Rd        | % C6.2.378 SYS #op1, Cn, Cm, #op2{, Xd}
 |    | 1 1 0 1 0 1 0 1 0 0 1 | 0 1 | op1 | n | n n n m m | m m | op2 | Rd        | % C6.2.379 SYSL #op1, Cn, Cm, #op2{, Xd}
 |    | 1 1 0 1 1 0 0 1 0 0 1 | imm9                | 0 1 | Xn        | Xd        | % C6.2.304 STG Xd|SP, [Xn|SP] , #imm} (MTE)
+|    | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | 1 0 0 1 0 | 1 1 1 1 1 | % C6.2.381 TSB CSYNC (TRF)
+|    | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | 0 0 0 1 0 | 1 1 1 1 1 | % C6.2.396 WFE
+|    | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | 0 0 0 1 1 | 1 1 1 1 1 | % C6.2.398 WFI
 |    | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | 0 0 0 0 1 | 1 1 1 1 1 | % C6.2.402 YIELD
 

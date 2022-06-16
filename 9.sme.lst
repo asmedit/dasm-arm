@@ -1,5 +1,6 @@
 A64 Hacking Guide. Part 4
 =========================
+(c) Groupoid Infinity
 
 A64:  R0-R30     -- general purpose registers (63..0: Xn, 31..0: Wn)
       R31        -- zero register (63..0)

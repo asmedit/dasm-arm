@@ -16,7 +16,7 @@ SVE:  Z0-Z31     -- SVE registers (2047..0, ..., 127..0: Qn, 63..0: Dn, 31..0: S
 
 Extensions:
 
-  NEON, PMULL, FP, FP16, SVE, CRC, LSE, LSE2, RDM, RCPC, RCPC2, DOTPROD, TME, FHM, DIT, FLAGM, SPE, LOR,
+  NEON, PMULL, FP, FP16, SVE, CRC, LSE, LSE2, RDM, RCPC, RCPC2, DOTPROD, TME, FHM, DIT, FLAGM, FLAGM2, SPE, LOR,
   SSBS, SB, PACA, PACG, DPB, DPB2, SVE2, SVE2-AES, SVE2-SM4, SVE2-SHA3, SVE2-BITPERM, FRINTTS, I8MM, F32MM, F64MM,
   BF16, RAND, BTI, MTE, JSCONV, FCMA, AES, SHA2, SHA3, SM4, SME, ASM, BRBE, SPECRES, RAS, LS64, LRCPC, LRCPC2
 
@@ -74,7 +74,7 @@ A64 Opcodes Table
 | 17 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | x 1 1 0 x | 1 1 1 1 1 | % C6.2.022 AUTIA1716/AUTIASP/AUTIAZ
 | 18 | 1 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 1 | 0 | 0 Z 1 0 1 | Rn        | Rd      1 | % C6.2.023 AUTIB Xd, Xn|SP, AUTIZB Xd
 | 19 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | x 1 1 1 x | 1 1 1 1 1 | % C6.2.023 AUTIB1716/AUTIBSP/AUTIBZ
-| 1A | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 0 0 | 0 | 1 0 0 0 0 | 0 0 0 1 0 | 1 1 1 1 1 | % C6.2.024 AXFLAG (FLAGM)
+| 1A | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 0 0 | 0 | 1 0 0 0 0 | 0 0 0 1 0 | 1 1 1 1 1 | % C6.2.024 AXFLAG (FLAGM2)
 | 1B | 0 0 0 1 0 1 | imm26                                                       | % C6.2.025 B #imm
 | 1C | 0 1 0 1 0 1 0 0 | imm19                                       | 0 | cond  | % C6.2.026 B.cond #imm
 | 1D | 0 1 0 1 0 1 0 0 | imm19                                       | 1 | cond  | % C6.2.027 BC.cond #imm (HBC)
@@ -218,5 +218,8 @@ A64 Opcodes Table
 |    | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | 0 0 1 0 0 | 1 1 1 1 1 | % C6.2.280 SEV
 |    | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | 0 0 1 0 1 | 1 1 1 1 1 | % C6.2.281 SEVL
 |    | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 1 0 0 | 0 0 1 0 0 | 1 1 1 1 1 | % C6.2.290 SSBB
+|    | 1 1 0 1 0 1 0 1 0 0 0 | 0 1 | op1 | n | n n n m m | m m | op2 | Rd        | % C6.2.378 SYS #op1, Cn, Cm, #op2{, Xd}
+|    | 1 1 0 1 0 1 0 1 0 0 1 | 0 1 | op1 | n | n n n m m | m m | op2 | Rd        | % C6.2.379 SYSL #op1, Cn, Cm, #op2{, Xd}
 |    | 1 1 0 1 1 0 0 1 0 0 1 | imm9                | 0 1 | Xn        | Xd        | % C6.2.304 STG Xd|SP, [Xn|SP] , #imm} (MTE)
+|    | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | 0 0 0 0 1 | 1 1 1 1 1 | % C6.2.402 YIELD
 

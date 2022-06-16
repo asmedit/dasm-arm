@@ -13,6 +13,12 @@ SVE:  Z0-Z31     -- SVE registers (2047..0, ..., 127..0: Qn, 63..0: Dn, 31..0: S
       P0-P15     -- SVE predicate registers (255..0, ..., 15..0)
       FFR        -- SVE first fault register (63..0)
 
+Extensions:
+
+  NEON, PMULL, FP, FP16, SVE, CRC, LSE, LSE2, RDM, RCPC, RCPC2, DOTPROD, TME, FHM, DIT, FLAGM,
+  SSBS, SB, PACA, PACG, DPB, DPB2, SVE2, SVE2-AES, SVE2-SM4, SVE2-SHA3, SVE2-BITPERM, FRINTTS, I8MM, F32MM, F64MM,
+  BF16, RAND, BTI, MTE, JSCONV, FCMA, AES, SHA2, SHA3, SM4, SME, ASM, BRBE, SPECRES, RAS, LS64, LRCPC
+
 A64 Instruction Format
 ----------------------
 
@@ -47,7 +53,7 @@ A64 Opcodes Table
 | 03 | x 0 0 0 1 0 1 1 0 0 1 | Rm        | o | o o | im3 | Rn        | Rd        | % C6.2.003 ADD Wd|WSP, Wn|WSP, Wm{, extend #amount}
 | 04 | x 0 0 1 0 0 0 1 0 s | imm12                       | Rn        | Rd        | % C6.2.004 ADD Ws|WSP, Wn|WSP, #imm{, shift}
 | 05 | x 0 0 0 1 0 1 1 s s 0 | Rm        | imm6          | Rn        | Rd        | % C6.2.005 ADD Wd, Wn{, shift #amount}
-| 06 | x 0 1 0 1 0 1 1 0 0 | uimm6       | 0 | 0 | uimm4 | Xn        | Xd        | % C6.2.006 ADDG Xd|SP, Xn|SP, #uimm6, #uimm4
+| 06 | x 0 1 0 1 0 1 1 0 0 | uimm6       | 0 | 0 | uimm4 | Xn        | Xd        | % C6.2.006 ADDG Xd|SP, Xn|SP, #uimm6, #uimm4 (MTE)
 | 07 | x 0 1 0 1 0 1 1 0 0 1 | Rm        | o | o o | im3 | Rn        | Rd        | % C6.2.007 ADDS Wd, Wm|WSP{, extend #amount} %C6.2.059
 | 08 | x 0 1 1 0 0 0 1 0 s | imm12                       | Rn        | Rd        | % C6.2.008 ADDS Wd, Wn|WSP, #imm{, shift}
 | 09 | x 0 1 0 1 0 1 1 s s 0 | Rm        | imm6          | Rn        | Rd        | % C6.2.009 ADR Wd, Wm, Wm{, shift #amount}
@@ -67,11 +73,11 @@ A64 Opcodes Table
 | 17 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | x 1 1 0 x | 1 1 1 1 1 | % C6.2.022 AUTIA1716/AUTIASP/AUTIAZ
 | 18 | 1 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 1 | 0 | 0 Z 1 0 1 | Rn        | Rd      1 | % C6.2.023 AUTIB Xd, Xn|SP, AUTIZB Xd
 | 19 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | x 1 1 1 x | 1 1 1 1 1 | % C6.2.023 AUTIB1716/AUTIBSP/AUTIBZ
-| 1A | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 0 0 | 0 | 1 0 0 0 0 | 0 0 0 1 0 | 1 1 1 1 1 | % C6.2.024 AXFLAG
+| 1A | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 0 0 | 0 | 1 0 0 0 0 | 0 0 0 1 0 | 1 1 1 1 1 | % C6.2.024 AXFLAG (FLAGM)
 | 1B | 0 0 0 1 0 1 | imm26                                                       | % C6.2.025 B #imm
 | 1C | 0 1 0 1 0 1 0 0 | imm19                                       | 0 | cond  | % C6.2.026 B.cond #imm
-| 1D | 0 1 0 1 0 1 0 0 | imm19                                       | 1 | cond  | % C6.2.027 BC.cond #imm
-| 1E | x 0 1 1 0 0 1 1 0 n | immr8       | imms6         | 1 1 1 1 1 | Rd        | % C6.2.028 BFC Wd, #lsb, #width
+| 1D | 0 1 0 1 0 1 0 0 | imm19                                       | 1 | cond  | % C6.2.027 BC.cond #imm (HBC)
+| 1E | x 0 1 1 0 0 1 1 0 n | immr8       | imms6         | 1 1 1 1 1 | Rd        | % C6.2.028 BFC Wd, #lsb, #width (ASM)
 | 1F | x 0 1 1 0 0 1 1 0 n | immr8       | imms6         | Rn        | Rd        | % C6.2.029 BFI Wd, Wn, #lsb, #width
 | 20 | x 0 1 1 0 0 1 1 0 n | immr8       | imms6         | Rn        | Rd        | % C6.2.030 BFM Wd, Wm, #immr8, #imms6
 | 21 | x 0 1 1 0 0 1 1 0 n | immr8       | imms6         | Rn        | Rd        | % C6.2.031 BFXIL Wd, Wm, #immr8, #imms6
@@ -79,24 +85,24 @@ A64 Opcodes Table
 | 23 | x 1 1 0 1 0 1 0 s s 1 | Rm        | imm6          | Rn        | Rd        | % C6.2.033 BICS Wd, Wn, Wm{, shift #amount}
 | 24 | 1 0 0 1 0 1 | imm26                                                       | % C6.2.034 BL #imm
 | 25 | 1 1 0 1 0 1 1 0 0 0 1 | 1 1 1 1 1 | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.035 BLR Xn
-| 26 | 1 1 0 1 0 1 1 Z 0 0 1 | 1 1 1 1 1 | 0 | 0 0 0 1 M | Rn        | Rm        | % C6.2.036 BLRAAZ/BLRABZ Xn, BLRAA/BLRAB Xn, Xm|SP
+| 26 | 1 1 0 1 0 1 1 Z 0 0 1 | 1 1 1 1 1 | 0 | 0 0 0 1 M | Rn        | Rm        | % C6.2.036 BLRAAZ/BLRABZ Xn, BLRAA/BLRAB Xn, Xm|SP (PACA)
 | 27 | 1 1 0 1 0 1 1 0 0 0 0 | 1 1 1 1 1 | 0 | 0 0 0 0 0 | Rn        | 0 0 0 0 0 | % C6.2.037 BR Xn
 | 28 | 1 1 0 1 0 1 1 Z 0 0 0 | 1 1 1 1 1 | 0 | 0 0 0 1 M | Rn        | Rm        | % C6.2.038 BRAAZ/BRABZ Xn, BRAA/BRAB Xn, Xm|SP
-| 29 | 1 1 0 1 0 1 0 1 0 0 0 | 0 1 0 0 1 | 0 | 1 1 1 0 0 | 1 0 | op2 | Rt      1 | % C6.2.039 BRB #op{, Xt}
+| 29 | 1 1 0 1 0 1 0 1 0 0 0 | 0 1 0 0 1 | 0 | 1 1 1 0 0 | 1 0 | op2 | Rt      1 | % C6.2.039 BRB #op{, Xt} (BRBE)
 | 2A | 1 1 0 1 0 1 0 0 0 0 1 | imm16                                 | 0 0 0 0 0 | % C6.2.040 BRK #imm
 | 2B | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 1 | 0 0 x x 0 | 1 1 1 1 1 | % C6.2.041 BTI {targets}
-| 2C | 0 0 0 0 1 0 0 0 1 L 1 | Rs        | o | 1 1 1 1 1 | Rn        | Rd        | % C6.2.042 CASAB/CASALB/CASB/CASLB Ws, Wt, [Xn|SP{, #0}]
-| 2D | 0 1 0 0 1 0 0 0 1 L 1 | Rs        | o | 1 1 1 1 1 | Rn        | Rd        | % C6.2.043 CASAH/CASALH/CASH/CASLH Ws, Wt, [Xn|SP{, #0}]
-| 2E | 0 x 0 0 1 0 0 0 0 L 1 | Rs        | o | 1 1 1 1 1 | Rn        | Rd        | % C6.2.044 CASP/CASPA/CASPAL/CASPL Ws, Ws+1, Wt, [Xn|SP{, #0}]
-| 2F | 1 x 0 0 1 0 0 0 1 L 1 | Rs        | o | 1 1 1 1 1 | Rn        | Rd        | % C6.2.045 CAS/CASA/CASAL/CASL Ws, Wt, [Xn|SP{, #0}]
+| 2C | 0 0 0 0 1 0 0 0 1 L 1 | Rs        | o | 1 1 1 1 1 | Rn        | Rd        | % C6.2.042 CASAB/CASALB/CASB/CASLB Ws, Wt, [Xn|SP{, #0}] (LSE)
+| 2D | 0 1 0 0 1 0 0 0 1 L 1 | Rs        | o | 1 1 1 1 1 | Rn        | Rd        | % C6.2.043 CASAH/CASALH/CASH/CASLH Ws, Wt, [Xn|SP{, #0}] (LSE)
+| 2E | 0 x 0 0 1 0 0 0 0 L 1 | Rs        | o | 1 1 1 1 1 | Rn        | Rd        | % C6.2.044 CASP/CASPA/CASPAL/CASPL Ws, Ws+1, Wt, [Xn|SP{, #0}] (LSE)
+| 2F | 1 x 0 0 1 0 0 0 1 L 1 | Rs        | o | 1 1 1 1 1 | Rn        | Rd        | % C6.2.045 CAS/CASA/CASAL/CASL Ws, Wt, [Xn|SP{, #0}] (LSE)
 | 30 | x 0 1 1 0 1 0 1 | imm19                                       | Rt        | % C6.2.046 CNBZ Xt, #imm
 | 31 | x 0 1 1 0 1 0 0 | imm19                                       | Rt        | % C6.2.047 CBZ Xt, #imm
 | 32 | x 0 1 1 1 0 1 0 0 1 0 | imm5      | c | c c c 1 0 | Rn        | 0 n z c v | % C6.2.048 CCMN Wn, #imm, #nzcv, cond
 | 33 | x 0 1 1 1 0 1 0 0 1 0 | Rm        | c | c c c 0 0 | Rn        | 0 n z c v | % C6.2.049 CCMN Wn, Wm, #nzcv, cond
 | 34 | x 1 1 1 1 0 1 0 0 1 0 | imm5      | c | c c c 1 0 | Rn        | 0 n z c v | % C6.2.050 CCMP Wn, #imm, #nzcv, cond
 | 35 | x 1 1 1 1 0 1 0 0 1 0 | Rm        | c | c c c 0 0 | Rn        | 0 n z c v | % C6.2.051 CCMP Wn, Wm, #nzcv, cond
-| 36 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 0 0 | 0 | 1 0 0 0 0 | 0 0 0 0 0 | 1 1 1 1 1 | % C6.2.052 CFINV
-| 37 | 1 1 0 1 0 1 0 1 0 0 0 | 0 1 0 1 1 | 0 | 1 1 1 0 0 | 1 1 1 0 0 | Rt        | % C6.2.053 CFP RCTX, Xt
+| 36 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 0 0 | 0 | 1 0 0 0 0 | 0 0 0 0 0 | 1 1 1 1 1 | % C6.2.052 CFINV (FLAGM)
+| 37 | 1 1 0 1 0 1 0 1 0 0 0 | 0 1 0 1 1 | 0 | 1 1 1 0 0 | 1 1 1 0 0 | Rt        | % C6.2.053 CFP RCTX, Xt (SPECRES)
 | 38 | x 0 0 1 1 0 1 0 1 0 0 | Rm        | c | c c c 0 1 | Rn        | Rd        | % C6.2.054 CINC Wd, Wn, cond
 | 39 | x 1 0 1 1 0 1 0 1 0 0 | Rm        | c | c c c 0 0 | Rn        | Rd        | % C6.2.055 CINV Wd, Wn, cond
 | 3A | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 1 i i | i i 0 1 0 | 1 1 1 1 1 | % C6.2.056 CLREX {#imm}
@@ -110,39 +116,39 @@ A64 Opcodes Table
 | 42 | x 1 1 0 1 0 1 1 s s 0 | Rm        | imm6          | Rn        | 1 1 1 1 1 | % C6.2.064 CMP Wn|WSP, Wm{, shift #amount}
 | 43 | 1 0 1 1 1 0 1 0 1 1 0 | Xm        | 0 | 0 0 0 0 0 | Xn        | 1 1 1 1 1 | % C6.2.065 CMPP Xn|SP, Xm|SP
 | 44 | x 1 0 1 1 0 1 0 1 0 0 | Rm        | c | c c c 0 1 | Rn        | Rd        | % C6.2.066 CNEG Wd, Wn, cond
-| 45 | 1 1 0 1 0 1 0 1 0 0 0 | 0 1 0 1 1 | 0 | 1 1 1 0 0 | 1 1 1 1 1 | Rt        | % C6.2.067 CPP RCTX, Xt
-| 46 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 0 0 0 0 1 | Rn        | Rd        | % C6.2.068 CPYFE/CPYFM/CPYFP [Xd]!, [Xs]!, Xn!
-| 47 | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 1 0 0 0 1 | Rn        | Rd        | % C6.2.069 CPYFEN/CPYFMN/CPYFPN [Xd]!, [Xs]!, Xn!
-| 48 | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 0 0 0 0 1 | Rn        | Rd        | % C6.2.070 CPYFERN/CPYFMRN/CPYFPRN [Xd]!, [Xs]!, Xn!
-| 49 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 0 1 0 0 1 | Rn        | Rd        | % C6.2.071 CPYFERT/CPYFMRT/CPYFPRT [Xd]!, [Xs]!, Xn!
-| 4A | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 1 1 0 0 1 | Rn        | Rd        | % C6.2.072 CPYFERTN/CPYFMRTN/CPYFPRTN [Xd]!, [Xs]!, Xn!
-| 4B | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 0 1 0 0 1 | Rn        | Rd        | % C6.2.073 CPYFERTRN/CPYFMRTRN/CPYFPRTRN [Xd]!, [Xs]!, Xn!
-| 4C | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 1 1 0 0 1 | Rn        | Rd        | % C6.2.074 CPYFERTWN/CPYFMRTWN/CPYFPRTWN [Xd]!, [Xs]!, Xn!
-| 4D | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 0 1 1 0 1 | Rn        | Rd        | % C6.2.075 CPYFET/CPYFMT/CPYFPT [Xd]!, [Xs]!, Xn!
-| 4E | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 1 1 1 0 1 | Rn        | Rd        | % C6.2.076 CPYFETN/CPYFMTN/CPYFMTN [Xd]!, [Xs]!, Xn!
-| 4F | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 0 1 1 0 1 | Rn        | Rd        | % C6.2.077 CPYFETRN/CPYFMTRN/CPYFPTRN [Xd]!, [Xs]!, Xn!
-| 50 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 1 1 1 0 1 | Rn        | Rd        | % C6.2.078 CPYFETWN/CPYFMTWN/CPYFPTWN [Xd]!, [Xs]!, Xn!
-| 51 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 1 0 0 0 1 | Rn        | Rd        | % C6.2.079 CPYFEWN/CPYFMWN/CPYFPWN [Xd]!, [Xs]!, Xn!
-| 52 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 0 0 1 0 1 | Rn        | Rd        | % C6.2.080 CPYFEWT/CPYFMWT/CPYFPWT [Xd]!, [Xs]!, Xn!
-| 53 | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 1 0 1 0 1 | Rn        | Rd        | % C6.2.081 CPYFEWTN/CPYFMWTN/CPYFPWTN [Xd]!, [Xs]!, Xn!
-| 54 | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 0 0 1 0 1 | Rn        | Rd        | % C6.2.082 CPYFEWTRN/CPYFMWTRN/CPYFPWTRN [Xd]!, [Xs]!, Xn!
-| 55 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 1 0 1 0 1 | Rn        | Rd        | % C6.2.083 CPYFEWTWN/CPYFMWTWN/CPYFPWTWN [Xd]!, [Xs]!, Xn!
-| 56 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 0 0 0 0 1 | Rn        | Rd        | % C6.2.084 CPYE/CPYM/CPYP [Xd]!, [Xs]!, Xn!
-| 57 | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 1 0 0 0 1 | Rn        | Rd        | % C6.2.085 CPYEN/CPYMN/CPYPN [Xd]!, [Xs]!, Xn!
-| 58 | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 0 0 0 0 1 | Rn        | Rd        | % C6.2.086 CPYERN/CPYMRN/CPYPRN [Xd]!, [Xs]!, Xn!
-| 59 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 0 1 0 0 1 | Rn        | Rd        | % C6.2.087 CPYERT/CPYMRT/CPYPRT [Xd]!, [Xs]!, Xn!
-| 5A | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 1 1 0 0 1 | Rn        | Rd        | % C6.2.088 CPYERTN/CPYMRTN/CPYPRTN [Xd]!, [Xs]!, Xn!
-| 5B | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 0 1 0 0 1 | Rn        | Rd        | % C6.2.089 CPYERTRN/CPYMRTRN/CPYPRTRN [Xd]!, [Xs]!, Xn!
-| 5C | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 1 1 0 0 1 | Rn        | Rd        | % C6.2.090 CPYERTWN/CPYMRTWN/CPYPRTWN [Xd]!, [Xs]!, Xn!
-| 5D | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 0 1 1 0 1 | Rn        | Rd        | % C6.2.091 CPYET/CPYMT/CPYPT [Xd]!, [Xs]!, Xn!
-| 5E | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 1 1 1 0 1 | Rn        | Rd        | % C6.2.092 CPYETN/CPYMTN/CPYPTN [Xd]!, [Xs]!, Xn!
-| 5F | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 0 1 1 0 1 | Rn        | Rd        | % C6.2.093 CPYETRN/CPYMTRN/CPYPTRN [Xd]!, [Xs]!, Xn!
-| 60 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 1 1 1 0 1 | Rn        | Rd        | % C6.2.094 CPYETWN/CPYMTWN/CPYPTWN [Xd]!, [Xs]!, Xn!
-| 61 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 1 0 0 0 1 | Rn        | Rd        | % C6.2.095 CPYEWN/CPYMWN/CPYPWN [Xd]!, [Xs]!, Xn!
-| 62 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 0 0 1 0 1 | Rn        | Rd        | % C6.2.096 CPYEWT/CPYMWT/CPYPWT [Xd]!, [Xs]!, Xn!
-| 63 | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 1 0 1 0 1 | Rn        | Rd        | % C6.2.097 CPYEWTN/CPYMWTN/CPYPWTN [Xd]!, [Xs]!, Xn!
-| 64 | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 0 0 1 0 1 | Rn        | Rd        | % C6.2.098 CPYEWTRN/CPYMWTRN/CPYPWTRN [Xd]!, [Xs]!, Xn!
-| 65 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 1 0 1 0 1 | Rn        | Rd        | % C6.2.099 CPYEWTWN/CPYMWTWN/CPYPWTWN [Xd]!, [Xs]!, Xn!
+| 45 | 1 1 0 1 0 1 0 1 0 0 0 | 0 1 0 1 1 | 0 | 1 1 1 0 0 | 1 1 1 1 1 | Rt        | % C6.2.067 CPP RCTX, Xt (SPECRES)
+| 46 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 0 0 0 0 1 | Rn        | Rd        | % C6.2.068 CPYFE/CPYFM/CPYFP [Xd]!, [Xs]!, Xn! (MOPS)
+| 47 | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 1 0 0 0 1 | Rn        | Rd        | % C6.2.069 CPYFEN/CPYFMN/CPYFPN [Xd]!, [Xs]!, Xn! (MOPS)
+| 48 | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 0 0 0 0 1 | Rn        | Rd        | % C6.2.070 CPYFERN/CPYFMRN/CPYFPRN [Xd]!, [Xs]!, Xn! (MOPS)
+| 49 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 0 1 0 0 1 | Rn        | Rd        | % C6.2.071 CPYFERT/CPYFMRT/CPYFPRT [Xd]!, [Xs]!, Xn! (MOPS)
+| 4A | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 1 1 0 0 1 | Rn        | Rd        | % C6.2.072 CPYFERTN/CPYFMRTN/CPYFPRTN [Xd]!, [Xs]!, Xn! (MOPS)
+| 4B | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 0 1 0 0 1 | Rn        | Rd        | % C6.2.073 CPYFERTRN/CPYFMRTRN/CPYFPRTRN [Xd]!, [Xs]!, Xn! (MOPS)
+| 4C | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 1 1 0 0 1 | Rn        | Rd        | % C6.2.074 CPYFERTWN/CPYFMRTWN/CPYFPRTWN [Xd]!, [Xs]!, Xn! (MOPS)
+| 4D | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 0 1 1 0 1 | Rn        | Rd        | % C6.2.075 CPYFET/CPYFMT/CPYFPT [Xd]!, [Xs]!, Xn! (MOPS)
+| 4E | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 1 1 1 0 1 | Rn        | Rd        | % C6.2.076 CPYFETN/CPYFMTN/CPYFMTN [Xd]!, [Xs]!, Xn! (MOPS)
+| 4F | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 0 1 1 0 1 | Rn        | Rd        | % C6.2.077 CPYFETRN/CPYFMTRN/CPYFPTRN [Xd]!, [Xs]!, Xn! (MOPS)
+| 50 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 1 1 1 0 1 | Rn        | Rd        | % C6.2.078 CPYFETWN/CPYFMTWN/CPYFPTWN [Xd]!, [Xs]!, Xn! (MOPS)
+| 51 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 1 0 0 0 1 | Rn        | Rd        | % C6.2.079 CPYFEWN/CPYFMWN/CPYFPWN [Xd]!, [Xs]!, Xn! (MOPS)
+| 52 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 0 0 1 0 1 | Rn        | Rd        | % C6.2.080 CPYFEWT/CPYFMWT/CPYFPWT [Xd]!, [Xs]!, Xn! (MOPS)
+| 53 | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 1 0 1 0 1 | Rn        | Rd        | % C6.2.081 CPYFEWTN/CPYFMWTN/CPYFPWTN [Xd]!, [Xs]!, Xn! (MOPS)
+| 54 | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 0 0 1 0 1 | Rn        | Rd        | % C6.2.082 CPYFEWTRN/CPYFMWTRN/CPYFPWTRN [Xd]!, [Xs]!, Xn! (MOPS)
+| 55 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 1 0 1 0 1 | Rn        | Rd        | % C6.2.083 CPYFEWTWN/CPYFMWTWN/CPYFPWTWN [Xd]!, [Xs]!, Xn! (MOPS)
+| 56 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 0 0 0 0 1 | Rn        | Rd        | % C6.2.084 CPYE/CPYM/CPYP [Xd]!, [Xs]!, Xn! (MOPS)
+| 57 | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 1 0 0 0 1 | Rn        | Rd        | % C6.2.085 CPYEN/CPYMN/CPYPN [Xd]!, [Xs]!, Xn! (MOPS)
+| 58 | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 0 0 0 0 1 | Rn        | Rd        | % C6.2.086 CPYERN/CPYMRN/CPYPRN [Xd]!, [Xs]!, Xn! (MOPS)
+| 59 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 0 1 0 0 1 | Rn        | Rd        | % C6.2.087 CPYERT/CPYMRT/CPYPRT [Xd]!, [Xs]!, Xn! (MOPS)
+| 5A | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 1 1 0 0 1 | Rn        | Rd        | % C6.2.088 CPYERTN/CPYMRTN/CPYPRTN [Xd]!, [Xs]!, Xn! (MOPS)
+| 5B | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 0 1 0 0 1 | Rn        | Rd        | % C6.2.089 CPYERTRN/CPYMRTRN/CPYPRTRN [Xd]!, [Xs]!, Xn! (MOPS)
+| 5C | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 1 1 0 0 1 | Rn        | Rd        | % C6.2.090 CPYERTWN/CPYMRTWN/CPYPRTWN [Xd]!, [Xs]!, Xn! (MOPS)
+| 5D | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 0 1 1 0 1 | Rn        | Rd        | % C6.2.091 CPYET/CPYMT/CPYPT [Xd]!, [Xs]!, Xn! (MOPS)
+| 5E | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 1 1 1 0 1 | Rn        | Rd        | % C6.2.092 CPYETN/CPYMTN/CPYPTN [Xd]!, [Xs]!, Xn! (MOPS)
+| 5F | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 0 1 1 0 1 | Rn        | Rd        | % C6.2.093 CPYETRN/CPYMTRN/CPYPTRN [Xd]!, [Xs]!, Xn! (MOPS)
+| 60 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 1 1 1 0 1 | Rn        | Rd        | % C6.2.094 CPYETWN/CPYMTWN/CPYPTWN [Xd]!, [Xs]!, Xn! (MOPS)
+| 61 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 1 0 0 0 1 | Rn        | Rd        | % C6.2.095 CPYEWN/CPYMWN/CPYPWN [Xd]!, [Xs]!, Xn! (MOPS)
+| 62 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 0 0 1 0 1 | Rn        | Rd        | % C6.2.096 CPYEWT/CPYMWT/CPYPWT [Xd]!, [Xs]!, Xn! (MOPS)
+| 63 | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 1 0 1 0 1 | Rn        | Rd        | % C6.2.097 CPYEWTN/CPYMWTN/CPYPWTN [Xd]!, [Xs]!, Xn! (MOPS)
+| 64 | s z 0 1 1 1 0 1 o o 0 | Rs        | 1 | 0 0 1 0 1 | Rn        | Rd        | % C6.2.098 CPYEWTRN/CPYMWTRN/CPYPWTRN [Xd]!, [Xs]!, Xn! (MOPS)
+| 65 | s z 0 1 1 1 0 1 o o 0 | Rs        | 0 | 1 0 1 0 1 | Rn        | Rd        | % C6.2.099 CPYEWTWN/CPYMWTWN/CPYPWTWN [Xd]!, [Xs]!, Xn! (MOPS)
 | 66 | x 0 0 1 1 0 1 0 1 1 0 | Rm        | 0 | 1 0 0 s z | Rn        | Rd        | % C6.2.100 CRC32B/CRC32H/CRC32W/CRC32X Wd, Wn, Wm
 | 67 | x 0 0 1 1 0 1 0 1 1 0 | Rm        | 0 | 1 0 1 s z | Rn        | Rd        | % C6.2.101 CRC32CB/CRC32CH/CRC32CW/CRC32CX Wd, Wn, Wm
 | 68 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | 0 0 1 0 0 | 1 1 1 1 1 | % C6.2.102 CSDB
@@ -160,28 +166,28 @@ A64 Opcodes Table
 | 74 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 1 m m | m m 1 0 1 | 1 1 1 1 1 | % C6.2.114 DMB
 | 75 | 1 1 0 1 0 1 0 1 1 0 1 | 1 1 1 1 1 | 0 | 0 0 0 0 0 | 1 1 1 1 1 | 0 0 0 0 0 | % C6.2.115 DRPS
 | 76 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 1 m m | m m 1 0 0 | 1 1 1 1 1 | % C6.2.116 DSB option|#imm
-| 77 | 1 1 0 1 0 1 0 1 0 0 0 | 0 1 0 1 1 | 0 | 1 1 1 0 0 | 1 1 1 0 1 | Rd        | % C6.2.117 DVP RCTX, Xd
+| 77 | 1 1 0 1 0 1 0 1 0 0 0 | 0 1 0 1 1 | 0 | 1 1 1 0 0 | 1 1 1 0 1 | Rd        | % C6.2.117 DVP RCTX, Xd (SPECRES)
 | 78 | x 1 0 0 1 0 1 0 s s 1 | Rm        | imm6          | Rn        | Rd        | % C6.2.118 EON Wd, Wn, Wm{, shift #amount}
 | 79 | x 1 0 1 0 0 1 0 0 N | immr        | imms          | Rn        | Rd        | % C6.2.119 EOR Wd|ESP, Wn, #imm
 | 7A | x 1 0 0 1 0 1 0 s s 0 | Rm        | imm6          | Rn        | Rd        | % C6.2.120 EOR Wd, Wn, Wm{, shift #amount}
 | 7B | 1 1 0 1 0 1 1 0 1 0 0 | 1 1 1 1 1 | 0 | 0 0 0 0 0 | 1 1 1 1 1 | 0 0 0 0 0 | % C6.2.121 ERET
-| 7C | 1 1 0 1 0 1 1 0 1 0 0 | 1 1 1 1 1 | 0 | 0 0 0 1 M | 1 1 1 1 1 | 1 1 1 1 1 | % C6.2.122 ERETAA/ERETBB
-| 7D | 1 1 0 1 0 1 0 1 1 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | 1 0 0 0 0 | 1 1 1 1 1 | % C6.2.123 ESB
+| 7C | 1 1 0 1 0 1 1 0 1 0 0 | 1 1 1 1 1 | 0 | 0 0 0 1 M | 1 1 1 1 1 | 1 1 1 1 1 | % C6.2.122 ERETAA/ERETBB (PACA)
+| 7D | 1 1 0 1 0 1 0 1 1 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | 1 0 0 0 0 | 1 1 1 1 1 | % C6.2.123 ESB (RAS)
 | 7E | x 0 0 1 0 0 1 1 1 N 0 | Rm        | imm6          | Rn        | Rd        | % C6.2.124 EXTR Wd, Wn, Wm, #lsb
-| 7F | 1 0 0 1 1 0 1 0 1 1 0 | Xm        | 0 | 0 0 1 0 1 | Xn        | Xd        | % C6.2.125 GMI Xd, Xn|SP, Xm
+| 7F | 1 0 0 1 1 0 1 0 1 1 0 | Xm        | 0 | 0 0 1 0 1 | Xn        | Xd        | % C6.2.125 GMI Xd, Xn|SP, Xm (MTE)
 | 80 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 m m | m m o o o | 1 1 1 1 1 | % C6.2.126 HINT #imm
 | 81 | 1 1 0 1 0 1 0 0 0 1 0 | imm16                                 | 0 0 0 0 0 | % C6.2.127 HLT #imm
 | 82 | 1 1 0 1 0 1 0 0 0 0 0 | imm16                                 | 0 0 0 1 0 | % C6.2.128 HVC #imm
 | 83 | 1 1 0 1 0 1 0 1 0 0 0 | 0 1 o o o | 0 | 1 1 1 m m | m m o o o | Rd        | % C6.2.129 IC op{, Xd}
-| 84 | 1 0 0 1 1 0 1 0 1 1 0 | Xm        | 0 | 0 0 1 0 0 | Xn        | Xd        | % C6.2.130 IRG Xd|SP, Xn|SP{, Xm}
+| 84 | 1 0 0 1 1 0 1 0 1 1 0 | Xm        | 0 | 0 0 1 0 0 | Xn        | Xd        | % C6.2.130 IRG Xd|SP, Xn|SP{, Xm} (MTE)
 | 86 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 1 m m | m m 1 1 0 | 1 1 1 1 1 | % C6.2.131 ISB {option|#imm}
-| 87 | 1 1 1 1 1 0 0 0 0 0 1 | 1 1 1 1 1 | 1 | 1 0 1 0 0 | Rn        | Rd        | % C6.2.132 LD64B Xd, [Xn|SP {, #0}]
-| 88 | 0 0 1 1 1 0 0 0 A R 1 | Rs        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.133 LDADDAB/LDADDALB/LDADDB/LDADDLB Ws, Wd, [Xn|SP]
-| 89 | 0 1 1 1 1 0 0 0 A R 1 | Rs        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.134 LDADDAH/LDADDALH/LDADDH/LDADDLH Ws, Wd, [Xn|SP]
-| 8A | 1 x 1 1 1 0 0 0 A R 1 | Rs        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.135 LDADD/LDADDA/LDADDAL/LDADDL Ws, Wd, [Xn|SP]
-| 8B | 1 x 1 1 1 0 0 0 1 0 1 | 1 1 1 1 1 | 1 | 1 0 0 0 0 | Rn        | Rd        | % C6.2.136 LDAPR Wd, [Xn|SP {, #0}]
-| 8C | 0 0 1 1 1 0 0 0 1 0 1 | 1 1 1 1 1 | 1 | 1 0 0 0 0 | Rn        | Rd        | % C6.2.137 LDAPRB Wd, [Xn|SP {, #0}]
-| 8D | 0 1 1 1 1 0 0 0 1 0 1 | 1 1 1 1 1 | 1 | 1 0 0 0 0 | Rn        | Rd        | % C6.2.138 LDAPRH Wd, [Xn|SP {, #0}]
+| 87 | 1 1 1 1 1 0 0 0 0 0 1 | 1 1 1 1 1 | 1 | 1 0 1 0 0 | Rn        | Rd        | % C6.2.132 LD64B Xd, [Xn|SP {, #0}] (LS64)
+| 88 | 0 0 1 1 1 0 0 0 A R 1 | Rs        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.133 LDADDAB/LDADDALB/LDADDB/LDADDLB Ws, Wd, [Xn|SP] (LSE)
+| 89 | 0 1 1 1 1 0 0 0 A R 1 | Rs        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.134 LDADDAH/LDADDALH/LDADDH/LDADDLH Ws, Wd, [Xn|SP] (LSE)
+| 8A | 1 x 1 1 1 0 0 0 A R 1 | Rs        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.135 LDADD/LDADDA/LDADDAL/LDADDL Ws, Wd, [Xn|SP] (LSE)
+| 8B | 1 x 1 1 1 0 0 0 1 0 1 | 1 1 1 1 1 | 1 | 1 0 0 0 0 | Rn        | Rd        | % C6.2.136 LDAPR Wd, [Xn|SP {, #0}] (LRCPC)
+| 8C | 0 0 1 1 1 0 0 0 1 0 1 | 1 1 1 1 1 | 1 | 1 0 0 0 0 | Rn        | Rd        | % C6.2.137 LDAPRB Wd, [Xn|SP {, #0}] (LRCPC)
+| 8D | 0 1 1 1 1 0 0 0 1 0 1 | 1 1 1 1 1 | 1 | 1 0 0 0 0 | Rn        | Rd        | % C6.2.138 LDAPRH Wd, [Xn|SP {, #0}] (LRCPC)
 
 
 

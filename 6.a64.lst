@@ -173,6 +173,18 @@ A64 Opcodes Table
 | 81 | 1 1 0 1 0 1 0 0 0 1 0 | imm16                                 | 0 0 0 0 0 | % C6.2.127 HLT #imm
 | 82 | 1 1 0 1 0 1 0 0 0 0 0 | imm16                                 | 0 0 0 1 0 | % C6.2.128 HVC #imm
 | 83 | 1 1 0 1 0 1 0 1 0 0 0 | 0 1 o o o | 0 | 1 1 1 m m | m m o o o | Rd        | % C6.2.129 IC op{, Xd}
+| 84 | 1 0 0 1 1 0 1 0 1 1 0 | Xm        | 0 | 0 0 1 0 0 | Xn        | Xd        | % C6.2.130 IRG Xd|SP, Xn|SP{, Xm}
+| 86 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 1 m m | m m 1 1 0 | 1 1 1 1 1 | % C6.2.131 ISB {option|#imm}
+| 87 | 1 1 1 1 1 0 0 0 0 0 1 | 1 1 1 1 1 | 1 | 1 0 1 0 0 | Rn        | Rd        | % C6.2.132 LD64B Xd, [Xn|SP {, #0}]
+| 88 | 0 0 1 1 1 0 0 0 A R 1 | Rs        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.133 LDADDAB/LDADDALB/LDADDB/LDADDLB Ws, Wd, [Xn|SP]
+| 89 | 0 1 1 1 1 0 0 0 A R 1 | Rs        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.134 LDADDAH/LDADDALH/LDADDH/LDADDLH Ws, Wd, [Xn|SP]
+| 8A | 1 x 1 1 1 0 0 0 A R 1 | Rs        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.135 LDADD/LDADDA/LDADDAL/LDADDL Ws, Wd, [Xn|SP]
+| 8B | 1 x 1 1 1 0 0 0 1 0 1 | 1 1 1 1 1 | 1 | 1 0 0 0 0 | Rn        | Rd        | % C6.2.136 LDAPR Wd, [Xn|SP {, #0}]
+| 8C | 0 0 1 1 1 0 0 0 1 0 1 | 1 1 1 1 1 | 1 | 1 0 0 0 0 | Rn        | Rd        | % C6.2.137 LDAPRB Wd, [Xn|SP {, #0}]
+| 8D | 0 1 1 1 1 0 0 0 1 0 1 | 1 1 1 1 1 | 1 | 1 0 0 0 0 | Rn        | Rd        | % C6.2.138 LDAPRH Wd, [Xn|SP {, #0}]
+
+
+
 
 
 

@@ -44,6 +44,9 @@ A64 Opcodes Table
 
 3-way Register Ops:
 
+| 88 | 0 0 1 1 1 0 0 0 A R 1 | Rs        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.133 LDADDAB/LDADDALB/LDADDB/LDADDLB Ws, Wd, [Xn|SP]
+| 89 | 0 1 1 1 1 0 0 0 A R 1 | Rs        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.134 LDADDAH/LDADDALH/LDADDH/LDADDLH Ws, Wd, [Xn|SP]
+| 8A | 1 x 1 1 1 0 0 0 A R 1 | Rs        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.135 LDADD/LDADDA/LDADDAL/LDADDL Ws, Wd, [Xn|SP]
 | 46 | s z 0 1 1 0 0 1 o o 0 | Rs        | 0 | 0 0 0 0 1 | Rn        | Rd        | % C6.2.068 CPYFE/CPYFM/CPYFP [Xd]!, [Xs]!, Xn!
 | 47 | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 1 0 0 0 1 | Rn        | Rd        | % C6.2.069 CPYFEN/CPYFMN/CPYFPN [Xd]!, [Xs]!, Xn!
 | 48 | s z 0 1 1 0 0 1 o o 0 | Rs        | 1 | 0 0 0 0 1 | Rn        | Rd        | % C6.2.070 CPYFERN/CPYFMRN/CPYFPRN [Xd]!, [Xs]!, Xn!
@@ -83,6 +86,7 @@ A64 Opcodes Table
 | 10 | x 0 0 1 1 0 1 0 1 1 0 | Rm        | 0 | 0 1 0 1 0 | Rn        | Rd        | % C6.2.016 ASR Wd, Wn, Wm
 | 12 | x 0 0 1 1 0 1 0 1 1 0 | Rm        | 0 | 0 1 0 1 0 | Rn        | Rd        | % C6.2.018 ASRV Wd, Wn, Wm
 | 7F | 1 0 0 1 1 0 1 0 1 1 0 | Xm        | 0 | 0 0 1 0 1 | Xn        | Xd        | % C6.2.125 GMI Xd, Xn|SP, Xm
+| 84 | 1 0 0 1 1 0 1 0 1 1 0 | Xm        | 0 | 0 0 1 0 0 | Xn        | Xd        | % C6.2.130 IRG Xd|SP, Xn|SP{, Xm}
 | 2C | 0 0 0 0 1 0 0 0 1 L 1 | Rs        | o | 1 1 1 1 1 | Rn        | Rd        | % C6.2.042 CASAB/CASALB/CASB/CASLB Ws, Wt, [Xn|SP{, #0}]
 | 2D | 0 1 0 0 1 0 0 0 1 L 1 | Rs        | o | 1 1 1 1 1 | Rn        | Rd        | % C6.2.043 CASAH/CASALH/CASH/CASLH Ws, Wt, [Xn|SP{, #0}]
 | 2E | 0 x 0 0 1 0 0 0 0 L 1 | Rs        | o | 1 1 1 1 1 | Rn        | Rd        | % C6.2.044 CASP/CASPA/CASPAL/CASPL Ws, Ws+1, Wt, [Xn|SP{, #0}]
@@ -115,16 +119,22 @@ A64 Opcodes Table
 | 3D | x 0 1 0 1 0 1 1 0 0 1 | Rm        | o | o o i i i | Rn        | 1 1 1 1 1 | % C6.2.059 CMN Wn|WSP, Wm{, extend #amount}
 | 40 | x 1 1 0 1 0 1 1 0 0 1 | Rm        | o | o o i i i | Rn        | 1 1 1 1 1 | % C6.2.062 CMP Wn|WSP, Wm{, extend #amount}
 | 43 | 1 0 1 1 1 0 1 0 1 1 0 | Xm        | 0 | 0 0 0 0 0 | Xn        | 1 1 1 1 1 | % C6.2.065 CMPP Xn|SP, Xm|SP
-| 27 | 1 1 0 1 0 1 1 0 0 0 0 | 1 1 1 1 1 | 0 | 0 0 0 0 0 | Rn        | 0 0 0 0 0 | % C6.2.037 BR Xn
-| 25 | 1 1 0 1 0 1 1 0 0 0 1 | 1 1 1 1 1 | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.035 BLR Xn
-| 26 | 1 1 0 1 0 1 1 Z 0 0 1 | 1 1 1 1 1 | 0 | 0 0 0 1 M | Rn        | Rm        | % C6.2.036 BLRAAZ/BLRABZ Xn, BLRAA/BLRAB Xn, Xm|SP
-| 28 | 1 1 0 1 0 1 1 Z 0 0 0 | 1 1 1 1 1 | 0 | 0 0 0 1 M | Rn        | Rm        | % C6.2.038 BRAAZ/BRABZ Xn, BRAA/BRAB Xn, Xm|SP
 | 14 | 1 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 1 | 0 | 0 Z 1 1 0 | Rn        | Rd        | % C6.2.020 AUTDA Xd, Xn|SP, AUTDZA Xd
 | 15 | 1 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 1 | 0 | 0 Z 1 1 1 | Rn        | Rd        | % C6.2.021 AUTDB Xd, Xn|SP, AUTDZB Xd
 | 16 | 1 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 1 | 0 | 0 Z 1 0 0 | Rn        | Rd        | % C6.2.022 AUTIA Xd, Xn|SP, AUTIZA Xd
 | 18 | 1 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 1 | 0 | 0 Z 1 0 1 | Rn        | Rd        | % C6.2.023 AUTIB Xd, Xn|SP, AUTIZB Xd
 | 3B | x 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 0 | 0 | 0 0 1 0 1 | Rn        | Rd        | % C6.2.057 CLS Wd, Wn
 | 3C | x 1 0 1 1 0 1 0 1 1 0 | 0 0 0 0 0 | 0 | 0 0 0 1 0 | Rn        | Rd        | % C6.2.058 CLZ Wd, Wn
+| 27 | 1 1 0 1 0 1 1 0 0 0 0 | 1 1 1 1 1 | 0 | 0 0 0 0 0 | Rn        | 0 0 0 0 0 | % C6.2.037 BR Xn
+| 25 | 1 1 0 1 0 1 1 0 0 0 1 | 1 1 1 1 1 | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.035 BLR Xn
+| 26 | 1 1 0 1 0 1 1 Z 0 0 1 | 1 1 1 1 1 | 0 | 0 0 0 1 M | Rn        | Rm        | % C6.2.036 BLRAAZ/BLRABZ Xn, BLRAA/BLRAB Xn, Xm|SP
+| 28 | 1 1 0 1 0 1 1 Z 0 0 0 | 1 1 1 1 1 | 0 | 0 0 0 1 M | Rn        | Rm        | % C6.2.038 BRAAZ/BRABZ Xn, BRAA/BRAB Xn, Xm|SP
+| 87 | 1 1 1 1 1 0 0 0 0 0 1 | 1 1 1 1 1 | 1 | 1 0 1 0 0 | Rn        | Rd        | % C6.2.132 LD64B Xd, [Xn|SP {, #0}]
+| 87 | 1 1 1 1 1 0 0 0 0 0 1 | 1 1 1 1 1 | 1 | 1 0 1 0 0 | Rn        | Rd        | % C6.2.132 LD64B Xd, [Xn|SP {, #0}]
+| 8B | 1 x 1 1 1 0 0 0 1 0 1 | 1 1 1 1 1 | 1 | 1 0 0 0 0 | Rn        | Rd        | % C6.2.136 LDAPR Wd, [Xn|SP {, #0}]
+| 8C | 0 0 1 1 1 0 0 0 1 0 1 | 1 1 1 1 1 | 1 | 1 0 0 0 0 | Rn        | Rd        | % C6.2.137 LDAPRB Wd, [Xn|SP {, #0}]
+| 8D | 0 1 1 1 1 0 0 0 1 0 1 | 1 1 1 1 1 | 1 | 1 0 0 0 0 | Rn        | Rd        | % C6.2.137 LDAPRH Wd, [Xn|SP {, #0}]
+
 
 2-way Register Ops with Complex Immediate:
 
@@ -190,3 +200,5 @@ Pure Bits:
 | 80 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 m m | m m o o o | 1 1 1 1 1 | % C6.2.126 HINT #imm
 | 75 | 1 1 0 1 0 1 0 1 1 0 1 | 1 1 1 1 1 | 0 | 0 0 0 0 0 | 1 1 1 1 1 | 0 0 0 0 0 | % C6.2.115 DRPS
 | 7B | 1 1 0 1 0 1 1 0 1 0 0 | 1 1 1 1 1 | 0 | 0 0 0 0 0 | 1 1 1 1 1 | 0 0 0 0 0 | % C6.2.121 ERET
+| 86 | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 1 m m | m m 1 1 0 | 1 1 1 1 1 | % C6.2.131 ISB {option|#imm}
+

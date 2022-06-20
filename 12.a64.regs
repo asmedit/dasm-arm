@@ -114,7 +114,7 @@ A32 ISAR #0 Debug:
 
 A32 ISAR #0 Coproc:
 
-0000 None implemented, except for instructions separately attributed by the architecture to provide access to AArch32 System registers and System instructions.
+0000 None implemented, except for instructions separately attributed by the architecture to provide access to A32.
 0001 Adds generic CDP, LDC, MCR, MRC, and STC.
 0010 As for 0001, and adds generic CDP2, LDC2, MCR2, MRC2, and STC2.
 0011 As for 0010, and adds generic MCRR and MRRC.

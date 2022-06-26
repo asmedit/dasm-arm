@@ -1,5 +1,5 @@
-A64 Hacking Guide. Part 5
-=========================
+A64 Hacking Guide. Part 5: Registers
+====================================
 (c) Groupoid Infinity
 
 A64:  R0-R30     -- general purpose registers (63..0: Xn, 31..0: Wn)
@@ -53,31 +53,28 @@ A32 Registers:
                 +---------+---------+---------+---------+---------+---------+---------+---------+
   A32 ISAR #6   |         |  I8MM   |   BF16  | SPECRES |   SB    |   FHM   |   DP    |  JSCVT  |
                 +---------+---------+---------+---------+---------+---------+---------+---------+
+  A32 MMFR #0   | InnerShr|  FCSE   |  AuxReg |   TCM   | ShareLvl| OuterShr|  PMSA   |  VMSA   |
+                +---------+---------+---------+---------+---------+---------+---------+---------+
+  A32 MMFR #1   | BPred   | L1TstCln| L1Uni   | L1Hvd   | L1UniSW | L1HvdSW | L1UniVA | L1HvdVA |
+                +---------+---------+---------+---------+---------+---------+---------+---------+
+  A32 MMFR #2   | HWAccFlg| WFIStall| MemBarr | UniTLB  | HvdTLB  | L1HvdRng| L1HvdBG | L1HvdFG |
+                +---------+---------+---------+---------+---------+---------+---------+---------+
 
 
 A64 Registers:
 
-                  63...60   59...56   55...52   51...48   47...44   43...40   39...36   35...32
-                +---------+---------+---------+---------+---------+---------+---------+---------+
-                |  RNDR   |   TLB   |   TS    |   FHM   |   DP    |   SM4   |   SM3   |   SHA3  |
-                +---------+---------+---------+---------+---------+---------+---------+---------+
-                  31...28   27...24   23...20   19...16   15...12   11...08   07...05   04...00
-                +---------+---------+---------+---------+---------+---------+---------+---------+
-  A64 ISAR #0   |   RDM   |   TME   |  ATOMIC |  CRC32  |  SHA2   |   SHA1  |   AES   |   RES0  |
-                +---------+---------+---------+---------+---------+---------+---------+---------+
-
-
-                  63...60   59...56   55...52   51...48   47...44   43...40   39...36   35...32
-                +---------+---------+---------+---------+---------+---------+---------+---------+
-                |  LS64   |   XS    |   I8MM  |   DGH   |   BF16  | SPECRES |    SB   | FRINTTS |
-                +---------+---------+---------+---------+---------+---------+---------+---------+
-                  31...28   27...24   23...20   19...16   15...12   11...08   07...05   04...00
-                +---------+---------+---------+---------+---------+---------+---------+---------+
-  A64 ISAR #1   |   GPI   |   GPA   |  LRCPC  |  FCMA   |  JCVT   |   API   |   APA   |   DPB   |
-                +---------+---------+---------+---------+---------+---------+---------+---------+
-  A64 ISAR #2   |  RES0   |   PAC   |   HBC   |  MOPS   |  APA3   |   GPA3  |  RPRES  |  WFxT   |
-                +---------+---------+---------+---------+---------+---------+---------+---------+
-
+  63...60   59...56   55...52   51...48   47...44   43...40   39...36   35...32   31...28   27...24   23...20   19...16   15...12   11...08   07...05   04...00
++---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+
+|  CSV3   |   CSV2  |   RME   |   DIT   |   AMU   |   MPAM  |   SEL2  |   SVE   |   RAS   |   GIC   | AdvSIMD |    FP   |   EL3   |   EL2  |    EL1   |   EL0   | A64 PFR #0
++---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+
+|                                                           |   NMI   |   CSV2  | RNDRtrap|   SME   |         |  MPAM   |   RAS   |   MTE   |   SSBS  |   BT    | A64 PFR #1
++---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+
+|  RNDR   |   TLB   |   TS    |   FHM   |   DP    |   SM4   |   SM3   |   SHA3  |   RDM   |   TME   |  ATOMIC |  CRC32  |  SHA2   |   SHA1  |   AES   |   RES0  | A64 ISAR #0
++---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+
+|  LS64   |   XS    |   I8MM  |   DGH   |   BF16  | SPECRES |    SB   | FRINTTS |   GPI   |   GPA   |  LRCPC  |  FCMA   |  JCVT   |   API   |   APA   |   DPB   | A64 ISAR #1
++---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+
+|                                                                               |  RES0   |   PAC   |   HBC   |  MOPS   |  APA3   |   GPA3  |  RPRES  |  WFxT   | A64 ISAR #2
++---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+
 
 A32 ISAR #3 SVC:
 
@@ -88,7 +85,7 @@ A32 ISAR #3 SIMD:
 
 0b0000 None implemented.
 0b0001 Adds the SSAT and USAT instructions, and the Q bit in the PSRs.
-0b0011 Adds PKHBT, PKHTB, QADD16, QADD8, QASX, QSUB16, QSUB8, QSAX, SADD16, SADD8, SASX, SEL,
+0b0011 Adds the PKHBT, PKHTB, QADD16, QADD8, QASX, QSUB16, QSUB8, QSAX, SADD16, SADD8, SASX, SEL,
        SHADD16, SHADD8, SHASX, SHSUB16, SHSUB8, SHSAX, SSAT16, SSUB16, SSUB8, SSAX, SXTAB16,
        SXTB16, UADD16, UADD8, UASX, UHADD16, UHADD8, UHASX, UHSUB16, UHSUB8, UHSAX, UQADD16,
        UQADD8, UQASX, UQSUB16, UQSUB8, UQSAX, USAD8, USADA8, USAT16, USUB16, USUB8, USAX,
@@ -98,14 +95,14 @@ A32 ISAR #2 LoadStore:
 
 0000 No additional load/store instructions implemented.
 0001 Adds the LDRD and STRD instructions.
-0010 Load Acquire (LDAB, LDAH, LDA, LDAEXB, LDAEXH, LDAEX, LDAEXD) and
-     Store Release (STLB, STLH, STL, STLEXB, STLEXH, STLEX, STLEXD) instructions.
+0010 Adds Load Acquire (LDAB, LDAH, LDA, LDAEXB, LDAEXH, LDAEX, LDAEXD) and
+     Adds Store Release (STLB, STLH, STL, STLEXB, STLEXH, STLEX, STLEXD) instructions.
 
 A32 ISAR #0 Divide:
 
 0000 None implemented.
 0001 Adds SDIV and UDIV in the T32 instruction set.
-0010 As for 0001, and adds SDIV and UDIV in the A32 instruction set.
+0010 Adds SDIV and UDIV in the A32 instruction set.
 
 A32 ISAR #0 Debug:
 
@@ -116,9 +113,9 @@ A32 ISAR #0 Coproc:
 
 0000 None implemented, except for instructions separately attributed by the architecture to provide access to A32.
 0001 Adds generic CDP, LDC, MCR, MRC, and STC.
-0010 As for 0001, and adds generic CDP2, LDC2, MCR2, MRC2, and STC2.
-0011 As for 0010, and adds generic MCRR and MRRC.
-0100 As for 0011, and adds generic MCRR2 and MRRC2.
+0010 Adds generic CDP2, LDC2, MCR2, MRC2, and STC2.
+0011 Adds generic MCRR and MRRC.
+0100 Adds generic MCRR2 and MRRC2.
 
 A32 ISAR #0 CmpBr:
 
@@ -149,13 +146,13 @@ A32 ISAR #1 Interwork:
 
 0000 None implemented.
 0001 Adds the BX instruction, and the T bit in the PSR.
-0010 As for 0001, and adds the BLX instruction. PC loads have BX-like behavior.
+0010 Adds the BLX instruction. PC loads have BX-like behavior.
 
 A32 ISAR #1 Immediate:
 
 0000 None implemented.
-0001 Adds: The MOVT instruction, encodings with zero-extended 16-bit immediates
-     The T32 ADD and SUB instruction encodings with zero-extended 12-bit immediates.
+0001 Adds the MOVT instruction, encodings with zero-extended 16-bit immediates
+     Adds the T32 ADD and SUB instruction encodings with zero-extended 12-bit immediates.
 
 A32 ISAR #1 IfThen:
 
@@ -166,7 +163,7 @@ A32 ISAR #1 Extend:
 
 0000 No scalar sign-extend or zero-extend instructions are implemented, where scalar instructions means non-Advanced SIMD instructions.
 0001 Adds the SXTB, SXTH, UXTB, and UXTH instructions.
-0010 As for 0001, and adds the SXTB16, SXTAB, SXTAB16, SXTAH, UXTB16, UXTAB, UXTAB16, and UXTAH instructions.
+0010 Adds the SXTB16, SXTAB, SXTAB16, SXTAH, UXTB16, UXTAB, UXTAB16, and UXTAH instructions.
 
 A32 ISAR #1 ExceptAR:
 
@@ -187,16 +184,16 @@ A32 MVFR #2 FPmisc:
 
 0000 Not implemented, or no support for miscellaneous features.
 0001 Support for Floating-point selection.
-0010 As 0001, and Floating-point Conversion to Integer with Directed Rounding modes.
-0011 As 0010, and Floating-point Round to Integer Floating-point.
-0100 As 0011, and Floating-point MaxNum and MinNum.
+0010 Adds Floating-point Conversion to Integer with Directed Rounding modes.
+0011 Adds Floating-point Round to Integer Floating-point.
+0100 Adds Floating-point MaxNum and MinNum.
 
 A32 MVFR #2 SIMDmisc:
 
 0000 Not implemented, or no support for miscellaneous features.
 0001 Floating-point Conversion to Integer with Directed Rounding modes.
-0010 As 0001, and Floating-point Round to Integer Floating-point.
-0011 As 0010, and Floating-point MaxNum and MinNum.
+0010 Adds Floating-point Round to Integer Floating-point.
+0011 Adds Floating-point MaxNum and MinNum.
 
 A32 MIDR Implementer:
 
@@ -223,7 +220,3 @@ A32 MIDR Arch:
 0101 Armv5TE.
 0110 Armv5TEJ.
 0111 Armv6.
-
-
-
-

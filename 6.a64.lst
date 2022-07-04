@@ -385,15 +385,15 @@ A64 Opcodes Table
 |    | 0 1 1 0 1 0 0 1 0 0 | simm7           | Xt2       | Xn        | Xt        | % C6.2.306 STGP Xt1, Xt2, [Xn|SP{, #imm}]
 |    | 0 0 0 0 1 0 0 0 1 0 0 | 1 1 1 1 1 | 0 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.307 STLLRB Wt, [Xn|SP{,#0}]
 |    | 0 1 0 0 1 0 0 0 1 0 0 | 1 1 1 1 1 | 0 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.308 STLLRH Wt, [Xn|SP{,#0}]
-|    | 1 x 0 0 1 0 0 0 1 0 0 | 1 1 1 1 1 | 0 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.309 STLLR Wt, [Xn|SP{,#0}] / STLLR Xt, [Xn|SP{,#0}]
-|    | 1 x 0 0 1 0 0 0 1 0 0 | 1 1 1 1 1 | 0 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.310 STLR Wt, [Xn|SP{,#0}] / STLR Xt, [Xn|SP{,#0}]
+|    | 1 x 0 0 1 0 0 0 1 0 0 | 1 1 1 1 1 | 0 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.309 STLLR Wt, [Xn|SP{,#0}] ; STLLR Xt, [Xn|SP{,#0}]
+|    | 1 x 0 0 1 0 0 0 1 0 0 | 1 1 1 1 1 | 0 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.310 STLR Wt, [Xn|SP{,#0}] ; STLR Xt, [Xn|SP{,#0}]
 |    | 0 0 0 0 1 0 0 0 1 0 0 | 1 1 1 1 1 | 1 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.311 STLRB Wt, [Xn|SP{,#0}]
 |    | 0 1 0 0 1 0 0 0 1 0 0 | 1 1 1 1 1 | 1 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.312 STLRH Wt, [Xn|SP{,#0}]
-|    | 1 x 0 1 1 0 0 1 0 0 0 | imm9                | 0 0 | Rn        | Rt        | % C6.2.313 STLUR Wt, [Xn|SP{, #simm}] / STLUR Xt, [Xn|SP{, #simm}]
+|    | 1 x 0 1 1 0 0 1 0 0 0 | imm9                | 0 0 | Rn        | Rt        | % C6.2.313 STLUR Wt, [Xn|SP{, #simm}] ; STLUR Xt, [Xn|SP{, #simm}]
 |    | 0 0 0 1 1 0 0 1 0 0 0 | imm9                | 0 0 | Rn        | Rt        | % C6.2.314 STLURB Wt, [Xn|SP{, #simm}]
 |    | 0 1 0 1 1 0 0 1 0 0 0 | imm9                | 0 0 | Rn        | Rt        | % C6.2.315 STLURH Wt, [Xn|SP{, #simm}]
-|    | 1 s 0 0 1 0 0 0 0 0 1 | Rs        | 1 | Rt2       | Rn        | Rt        | % C6.2.316 STLXP Ws, Wt1, Wt2, [Xn|SP{,#0}] / STLXP Ws, Xt1, Xt2, [Xn|SP{,#0}]
-|    | 1 x 0 0 1 0 0 0 0 0 0 | Rs        | 1 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.317 STLXR Ws, Wt, [Xn|SP{,#0}] / STLXR Ws, Xt, [Xn|SP{,#0}]
+|    | 1 s 0 0 1 0 0 0 0 0 1 | Rs        | 1 | Rt2       | Rn        | Rt        | % C6.2.316 STLXP Ws, Wt1, Wt2, [Xn|SP{,#0}] ; STLXP Ws, Xt1, Xt2, [Xn|SP{,#0}]
+|    | 1 x 0 0 1 0 0 0 0 0 0 | Rs        | 1 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.317 STLXR Ws, Wt, [Xn|SP{,#0}] ; STLXR Ws, Xt, [Xn|SP{,#0}]
 |    | 0 0 0 0 1 0 0 0 0 0 0 | Rs        | 1 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.318 STLXRB Ws, Wt, [Xn|SP{,#0}]
 |    | 0 1 0 0 1 0 0 0 0 0 0 | Rs        | 1 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.319 STLXRH Ws, Wt, [Xn|SP{,#0}]
 |    | x 0 1 0 1 0 0 0 0 0 | imm7            | Rt2       | Rn        | Rt        | % C6.2.320 STNP Wt1, Wt2, [Xn|SP{, #imm}]
@@ -421,20 +421,20 @@ A64 Opcodes Table
 |    | 0 0 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 0 1 0 0 | Rn        | 1 1 1 1 1 | % C6.2.334 STSMINB/STSMINLB Ws, [Xn|SP] ; LDSMINB/LDSMINLB Ws, WZR, [Xn|SP]
 |    | 0 1 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 0 1 0 0 | Rn        | 1 1 1 1 1 | % C6.2.335 STSMINH/STSMINLH Ws, [Xn|SP] ; LDSMINH/LDSMINLH Ws, WZR, [Xn|SP]
 |    | 1 x 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 0 1 0 0 | Rn        | 1 1 1 1 1 | % C6.2.336 STSMIN/STSMINL Ws, [Xn|SP] ; LDSMIN/LDSMINL Ws, WZR, [Xn|SP]
-|    | 1 x 1 1 1 0 0 0 0 0 0 | imm9                | 1 0 | Rn        | Rt        | % C6.2.337 STTR Wt, [Xn|SP{, #simm}] / STTR Xt, [Xn|SP{, #simm}]
+|    | 1 x 1 1 1 0 0 0 0 0 0 | imm9                | 1 0 | Rn        | Rt        | % C6.2.337 STTR Wt, [Xn|SP{, #simm}] ; STTR Xt, [Xn|SP{, #simm}]
 |    | 0 0 1 1 1 0 0 0 0 0 0 | imm9                | 1 0 | Rn        | Rt        | % C6.2.338 STTRB Wt, [Xn|SP{, #simm}]
 |    | 0 1 1 1 1 0 0 0 0 0 0 | imm9                | 1 0 | Rn        | Rt        | % C6.2.339 STTRH Wt, [Xn|SP{, #simm}]
-|    | 1 x 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 1 0 0 0 | Rn        | 1 1 1 1 1 | % C6.2.340 STUMAX/STUMAXL Ws, [Xn|SP] / LDUMAX/LDUMAXL Ws, WZR, [Xn|SP]
-|    | 0 0 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 1 0 0 0 | Rn        | 1 1 1 1 1 | % C6.2.341 STUMAXB/STUMAXLB Ws, [Xn|SP] / LDUMAXB/LDUMAXLB Ws, WZR, [Xn|SP]
-|    | 0 1 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 1 0 0 0 | Rn        | 1 1 1 1 1 | % C6.2.342 STUMAXH/STUMAXLH Ws, [Xn|SP] / LDUMAXH/LDUMAXLH Ws, WZR, [Xn|SP]
-|    | 1 x 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 1 1 0 0 | Rn        | 1 1 1 1 1 | % C6.2.343 STUMIN/STUMINL Ws, [Xn|SP] / LDUMIN/LDUMINL Ws, WZR, [Xn|SP]
-|    | 0 0 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 1 1 0 0 | Rn        | 1 1 1 1 1 | % C6.2.344 STUMINB/STUMINLB Ws, [Xn|SP] / LDUMINB/LDUMINLB Ws, WZR, [Xn|SP]
-|    | 0 1 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 1 1 0 0 | Rn        | 1 1 1 1 1 | % C6.2.345 STUMINH/STUMINLH Ws, [Xn|SP] / LDUMINH/LDUMINLH Ws, WZR, [Xn|SP]
+|    | 1 x 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 1 0 0 0 | Rn        | 1 1 1 1 1 | % C6.2.340 STUMAX/STUMAXL Ws, [Xn|SP] ; LDUMAX/LDUMAXL Ws, WZR, [Xn|SP]
+|    | 0 0 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 1 0 0 0 | Rn        | 1 1 1 1 1 | % C6.2.341 STUMAXB/STUMAXLB Ws, [Xn|SP] ; LDUMAXB/LDUMAXLB Ws, WZR, [Xn|SP]
+|    | 0 1 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 1 0 0 0 | Rn        | 1 1 1 1 1 | % C6.2.342 STUMAXH/STUMAXLH Ws, [Xn|SP] ; LDUMAXH/LDUMAXLH Ws, WZR, [Xn|SP]
+|    | 1 x 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 1 1 0 0 | Rn        | 1 1 1 1 1 | % C6.2.343 STUMIN/STUMINL Ws, [Xn|SP] ; LDUMIN/LDUMINL Ws, WZR, [Xn|SP]
+|    | 0 0 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 1 1 0 0 | Rn        | 1 1 1 1 1 | % C6.2.344 STUMINB/STUMINLB Ws, [Xn|SP] ; LDUMINB/LDUMINLB Ws, WZR, [Xn|SP]
+|    | 0 1 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 1 1 0 0 | Rn        | 1 1 1 1 1 | % C6.2.345 STUMINH/STUMINLH Ws, [Xn|SP] ; LDUMINH/LDUMINLH Ws, WZR, [Xn|SP]
 |    | 1 x 1 1 1 0 0 0 0 0 0 | imm9                | 0 0 | Rn        | Rt        | % C6.2.346 STUR Wt, [Xn|SP{, #simm}] ; STUR Xt, [Xn|SP{, #simm}]
 |    | 0 0 1 1 1 0 0 0 0 0 0 | imm9                | 0 0 | Rn        | Rt        | % C6.2.347 STURB Wt, [Xn|SP{, #simm}]
 |    | 0 1 1 1 1 0 0 0 0 0 0 | imm9                | 0 0 | Rn        | Rt        | % C6.2.348 STURH Wt, [Xn|SP{, #simm}]
-|    | 1 s 0 0 1 0 0 0 0 0 1 | Rs        | 0 | Rt2       | Rn        | Rt        | % C6.2.349 STXP Ws, Wt1, Wt2, [Xn|SP{,#0}] ; STXP Ws, Xt1, Xt2, [Xn|SP{,#0}]
-|    | 1 x 0 0 1 0 0 0 0 0 0 | Rs        | 0 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.350 STXR Ws, Wt, [Xn|SP{,#0}] ; STXR Ws, Xt, [Xn|SP{,#0}]
+|    | 1 s 0 0 1 0 0 0 0 0 1 | Rs        | 0 | Rt2       | Rn        | Rt        | % C6.2.349 STXP Ws, Wt1, Wt2, [Xn|SP{,#0}]
+|    | 1 x 0 0 1 0 0 0 0 0 0 | Rs        | 0 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.350 STXR Ws, Wt, [Xn|SP{,#0}]
 |    | 0 0 0 0 1 0 0 0 0 0 0 | Rs        | 0 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.351 STXRB Ws, Wt, [Xn|SP{,#0}]
 |    | 0 1 0 0 1 0 0 0 0 0 0 | Rs        | 0 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.352 STXRH Ws, Wt, [Xn|SP{,#0}]
 |    | 1 1 0 1 1 0 0 1 1 1 1 | imm9                | 0 1 | Xn        | Xt        | % C6.2.353 STZ2G Xt|SP, [Xn|SP], #simm
@@ -450,16 +450,16 @@ A64 Opcodes Table
 |    | 1 1 0 1 0 0 0 1 1 0 | imm6        | 0 | 0 | uimm4 | Xn        | Xd        | % C6.2.359 SUBG Xd|SP, Xn|SP, #uimm6, #uimm4
 |    | 1 0 0 1 1 0 1 0 1 1 0 | Xm        | 0 | 0 0 0 0 0 | Xn        | Xd        | % C6.2.360 SUBP Xd, Xn|SP, Xm|SP
 |    | 1 0 1 1 1 0 1 0 1 1 0 | Xm        | 0 | 0 0 0 0 0 | Xn        | Xd        | % C6.2.361 SUBPS Xd, Xn|SP, Xm|SP
-|    | s 1 1 0 1 0 1 1 0 0 1 | Rm        | o | o o i i i | Rn        | Rd        | % C6.2.362 SUBS Wd, Wn|WSP, Wm{, extend {#amount}} ; SUBS Xd, Xn|SP, Rm{, extend {#amount}}
-|    | s 1 1 1 0 0 0 1 0 s | imm12                       | Rn        | Rd        | % C6.2.363 SUBS Wd, Wn|WSP, #imm{, shift} ; SUBS Xd, Xn|SP, #imm{, shift}
-|    | s 1 1 0 1 0 1 1 s s 0 | Rm        | imm6          | Rn        | Rd        | % C6.2.364 SUBS Wd, Wn, Wm{, shift #amount} ; SUBS Xd, Xn, Xm{, shift #amount}
+|    | s 1 1 0 1 0 1 1 0 0 1 | Rm        | o | o o i i i | Rn        | Rd        | % C6.2.362 SUBS Wd, Wn|WSP, Wm{, extend {#amount}}
+|    | s 1 1 1 0 0 0 1 0 s | imm12                       | Rn        | Rd        | % C6.2.363 SUBS Wd, Wn|WSP, #imm{, shift}
+|    | s 1 1 0 1 0 1 1 s s 0 | Rm        | imm6          | Rn        | Rd        | % C6.2.364 SUBS Wd, Wn, Wm{, shift #amount}
 |    | 1 1 0 1 0 1 0 0 0 0 0 | imm16                                 | 0 0 0 0 1 | % C6.2.365 SVC #imm
 |    | 1 x 1 1 1 0 0 0 A R 1 | Rs        | 1 | 0 0 0 0 0 | Rn        | Rt        | % C6.2.366 SWP/SWPAL/SWPA/SWPL Ws, Wt, [Xn|SP]
 |    | 0 0 1 1 1 0 0 0 A R 1 | Rs        | 1 | 0 0 0 0 0 | Rn        | Rt        | % C6.2.367 SWPAB/SWPALB/SWPB/SWPLB Ws, Wt, [Xn|SP]
 |    | 0 1 1 1 1 0 0 0 A R 1 | Rs        | 1 | 0 0 0 0 0 | Rn        | Rt        | % C6.2.368 SWPAH/SWPALH/SWPH/SWPLH Ws, Wt, [Xn|SP]
-|    | s 0 0 1 0 0 1 1 0 N 0 | 0 0 0 0 0 | 0 | 0 0 1 1 1 | Rn        | Rd        | % C6.2.369 SXTB Wd, Wn / SBFM Wd, Wn, #0, #7 ; SXTB Xd, Wn ; SBFM Xd, Xn, #0, #7
-|    | s 0 0 1 0 0 1 1 0 N 0 | 0 0 0 0 0 | 0 | 0 1 1 1 1 | Rn        | Rd        | % C6.2.370 SXTH Wd, Wn / SBFM Wd, Wn, #0, #15 ; SXTH Xd, Wn ; SBFM Xd, Xn, #0, #15
-|    | 1 0 0 1 0 0 1 1 0 1 0 | 0 0 0 0 0 | 0 | 1 1 1 1 1 | Rn        | Rd        | % C6.2.371 SXTW Xd, Wn / SBFM Xd, Xn, #0, #31
+|    | s 0 0 1 0 0 1 1 0 N 0 | 0 0 0 0 0 | 0 | 0 0 1 1 1 | Rn        | Rd        | % C6.2.369 SXTB Wd, Wn ; SBFM Wd, Wn, #0, #7
+|    | s 0 0 1 0 0 1 1 0 N 0 | 0 0 0 0 0 | 0 | 0 1 1 1 1 | Rn        | Rd        | % C6.2.370 SXTH Wd, Wn ; SBFM Wd, Wn, #0, #15
+|    | 1 0 0 1 0 0 1 1 0 1 0 | 0 0 0 0 0 | 0 | 1 1 1 1 1 | Rn        | Rd        | % C6.2.371 SXTW Xd, Wn ; SBFM Xd, Xn, #0, #31
 |    | 1 1 0 1 0 1 0 1 0 0 0 | 0 1 | op1 | n | n n n m m | m m | op2 | Rd        | % C6.2.372 SYS #op1, Cn, Cm, #op2{, Xd}
 |    | 1 1 0 1 0 1 0 1 0 0 1 | 0 1 | op1 | n | n n n m m | m m | op2 | Rd        | % C6.2.373 SYSL #op1, Cn, Cm, #op2{, Xd}
 |    | b 0 1 1 0 1 1 1 | b40       | imm14                           | Rt        | % C6.2.374 TBNZ Rt, #imm, label

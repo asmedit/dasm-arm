@@ -337,19 +337,19 @@ A64 Opcodes Table
 |    | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 1 0 0 | 0 0 1 1 1 | 1 1 1 1 1 | % C6.2.264 SB
 |    | s 1 0 1 1 0 1 0 0 0 0 | Rm        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.265 SBC Wd, Wn, Wm
 |    | s 1 1 1 1 0 1 0 0 0 0 | Rm        | 0 | 0 0 0 0 0 | Rn        | Rd        | % C6.2.266 SBCS Wd, Wn, Wm
-|    | s 0 0 1 0 0 1 1 0 N | immr        | imms          | Rn        | Rd        | % C6.2.267 SBFIZ Wd, Wn, #lsb, #width ; SBFM Wd, Wn, #(-lsb MOD 32), #(width-1)
+|    | s 0 0 1 0 0 1 1 0 N | immr        | imms          | Rn        | Rd        | % C6.2.267 SBFIZ Wd, Wn, #lsb, #width ; SBFM Wd, Wn, #lsb32, #width
 |    | s 0 0 1 0 0 1 1 0 N | immr        | imms          | Rn        | Rd        | % C6.2.268 SBFM Wd, Wn, #immr, #imms
-|    | s 0 0 1 0 0 1 1 0 N | immr        | imms          | Rn        | Rd        | % C6.2.269 SBFX Wd, Wn, #lsb, #width ; SBFM Wd, Wn, #lsb, #(lsb+width-1)
+|    | s 0 0 1 0 0 1 1 0 N | immr        | imms          | Rn        | Rd        | % C6.2.269 SBFX Wd, Wn, #lsb, #width ; SBFM Wd, Wn, #lsb, #lsbwidth
 |    | s 0 0 1 1 0 1 0 1 1 0 | Rm        | 0 | 0 0 0 1 1 | Rn        | Rd        | % C6.2.270 SDIV Wd, Wn, Wm
 |    | 0 0 1 1 1 0 1 0 0 0 0 | 0 0 0 0 0 | 0 | s 0 0 1 0 | Rn        | 0 1 1 0 1 | % C6.2.271 SETF8/SETF16 Wn
-|    | s z 0 1 1 1 0 1 1 1 0 | Rs        | x | x 0 0 0 1 | Rn        | Rd        | % C6.2.272 SETGE [Xd]!, Xn!, Xs ; SETGM [Xd]!, Xn!, Xs ; SETGP [Xd]!, Xn!, Xs
-|    | s z 0 1 1 1 0 1 1 1 0 | Rs        | x | x 1 0 0 1 | Rn        | Rd        | % C6.2.273 SETGEN [Xd]!, Xn!, Xs ; SETGMN [Xd]!, Xn!, Xs ; SETGPN [Xd]!, Xn!, Xs
-|    | s z 0 1 1 1 0 1 1 1 0 | Rs        | x | x 0 1 0 1 | Rn        | Rd        | % C6.2.274 SETGET [Xd]!, Xn!, Xs ; SETGMT [Xd]!, Xn!, Xs ; SETGPT [Xd]!, Xn!, Xs
-|    | s z 0 1 1 1 0 1 1 1 0 | Rs        | x | x 1 1 0 1 | Rn        | Rd        | % C6.2.275 SETGETN [Xd]!, Xn!, Xs ; SETGMTN [Xd]!, Xn!, Xs ; SETGPTN [Xd]!, Xn!, Xs
-|    | s z 0 1 1 0 0 1 1 1 0 | Rs        | x | x 0 0 0 1 | Rn        | Rd        | % C6.2.276 SETE [Xd]!, Xn!, Xs ; SETM [Xd]!, Xn!, Xs ; SETP [Xd]!, Xn!, Xs
-|    | s z 0 1 1 0 0 1 1 1 0 | Rs        | x | x 1 0 0 1 | Rn        | Rd        | % C6.2.277 SETEN [Xd]!, Xn!, Xs ; SETMN [Xd]!, Xn!, Xs ; SETPN [Xd]!, Xn!, Xs
-|    | s z 0 1 1 0 0 1 1 1 0 | Rs        | x | x 0 1 0 1 | Rn        | Rd        | % C6.2.278 SETET [Xd]!, Xn!, Xs ; SETMT [Xd]!, Xn!, Xs ; SETPT [Xd]!, Xn!, Xs
-|    | s z 0 1 1 0 0 1 1 1 0 | Rs        | x | x 1 1 0 1 | Rn        | Rd        | % C6.2.279 SETETN [Xd]!, Xn!, Xs ; SETMTN [Xd]!, Xn!, Xs ; SETPTN [Xd]!, Xn!, Xs
+|    | s z 0 1 1 1 0 1 1 1 0 | Rs        | x | x 0 0 0 1 | Rn        | Rd        | % C6.2.272 SETGE/SETGM/SETGP [Xd]!, Xn!, Xs
+|    | s z 0 1 1 1 0 1 1 1 0 | Rs        | x | x 1 0 0 1 | Rn        | Rd        | % C6.2.273 SETGEN/SETGMN/SETGPN [Xd]!, Xn!, Xs
+|    | s z 0 1 1 1 0 1 1 1 0 | Rs        | x | x 0 1 0 1 | Rn        | Rd        | % C6.2.274 SETGET/SETGMT/SETGPT [Xd]!, Xn!, Xs
+|    | s z 0 1 1 1 0 1 1 1 0 | Rs        | x | x 1 1 0 1 | Rn        | Rd        | % C6.2.275 SETGETN/SETGMTN/SETGPTN [Xd]!, Xn!, Xs
+|    | s z 0 1 1 0 0 1 1 1 0 | Rs        | x | x 0 0 0 1 | Rn        | Rd        | % C6.2.276 SETE/SETM/SETP [Xd]!, Xn!, Xs
+|    | s z 0 1 1 0 0 1 1 1 0 | Rs        | x | x 1 0 0 1 | Rn        | Rd        | % C6.2.277 SETEN/SETMN/SETPN [Xd]!, Xn!, Xs
+|    | s z 0 1 1 0 0 1 1 1 0 | Rs        | x | x 0 1 0 1 | Rn        | Rd        | % C6.2.278 SETET/SETMT/SETPT [Xd]!, Xn!, Xs
+|    | s z 0 1 1 0 0 1 1 1 0 | Rs        | x | x 1 1 0 1 | Rn        | Rd        | % C6.2.279 SETETN/SETMTN/SETPTN [Xd]!, Xn!, Xs
 |    | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | 0 0 1 0 0 | 1 1 1 1 1 | % C6.2.280 SEV
 |    | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | 0 0 1 0 1 | 1 1 1 1 1 | % C6.2.281 SEVL
 |    | 1 0 0 1 1 0 1 1 0 0 1 | Rm        | 0 | Ra        | Rn        | Rd        | % C6.2.282 SMADDL Xd, Wn, Wm, Xa
@@ -392,7 +392,7 @@ A64 Opcodes Table
 |    | 1 x 0 1 1 0 0 1 0 0 0 | imm9                | 0 0 | Rn        | Rt        | % C6.2.313 STLUR Wt, [Xn|SP{, #simm}] ; STLUR Xt, [Xn|SP{, #simm}]
 |    | 0 0 0 1 1 0 0 1 0 0 0 | imm9                | 0 0 | Rn        | Rt        | % C6.2.314 STLURB Wt, [Xn|SP{, #simm}]
 |    | 0 1 0 1 1 0 0 1 0 0 0 | imm9                | 0 0 | Rn        | Rt        | % C6.2.315 STLURH Wt, [Xn|SP{, #simm}]
-|    | 1 s 0 0 1 0 0 0 0 0 1 | Rs        | 1 | Rt2       | Rn        | Rt        | % C6.2.316 STLXP Ws, Wt1, Wt2, [Xn|SP{,#0}] ; STLXP Ws, Xt1, Xt2, [Xn|SP{,#0}]
+|    | 1 s 0 0 1 0 0 0 0 0 1 | Rs        | 1 | Rt2       | Rn        | Rt        | % C6.2.316 STLXP Ws,Wt1,Wt2,[Xn|SP{,#0}] ; STLXP Ws,Xt1,Xt2,[Xn|SP{,#0}]
 |    | 1 x 0 0 1 0 0 0 0 0 0 | Rs        | 1 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.317 STLXR Ws, Wt, [Xn|SP{,#0}] ; STLXR Ws, Xt, [Xn|SP{,#0}]
 |    | 0 0 0 0 1 0 0 0 0 0 0 | Rs        | 1 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.318 STLXRB Ws, Wt, [Xn|SP{,#0}]
 |    | 0 1 0 0 1 0 0 0 0 0 0 | Rs        | 1 | 1 1 1 1 1 | Rn        | Rt        | % C6.2.319 STLXRH Ws, Wt, [Xn|SP{,#0}]
@@ -407,7 +407,7 @@ A64 Opcodes Table
 |    | 0 0 1 1 1 0 0 0 0 0 0 | imm9                | 0 1 | Rn        | Rt        | % C6.2.324 STRB Wt, [Xn|SP], #simm
 |    | 0 0 1 1 1 0 0 0 0 0 0 | imm9                | 1 1 | Rn        | Rt        | % C6.2.324 STRB Wt, [Xn|SP, #simm]!
 |    | 0 0 1 1 1 0 0 1 0 0 | imm12                       | Rn        | Rt        | % C6.2.324 STRB Wt, [Xn|SP{, #pimm}]
-|    | 0 0 1 1 1 0 0 0 0 0 1 | Rm        | o | o o S 1 0 | Rn        | Rt        | % C6.2.325 STRB Wt, [Xn|SP, (Wm|Xm), extend {#amount}] ; STRB Wt, [Xn|SP, Xm{, LSL #amount}]
+|    | 0 0 1 1 1 0 0 0 0 0 1 | Rm        | o | o o S 1 0 | Rn        | Rt        | % C6.2.325 STRB Wt,[Xn|SP,(Wm|Xm),extend {#am}] ; STRB Wt,[Xn|SP,Xm{,LSL #am}]
 |    | 0 1 1 1 1 0 0 0 0 0 0 | imm9                | 0 1 | Rn        | Rt        | % C6.2.326 STRH Wt, [Xn|SP], #imm
 |    | 0 1 1 1 1 0 0 0 0 0 0 | imm9                | 1 1 | Rn        | Rt        | % C6.2.326 STRH Wt, [Xn|SP, #imm]!
 |    | 0 1 1 1 1 0 0 1 0 0 | imm12                       | Rn        | Rt        | % C6.2.326 STRH Wt, [Xn|SP{, #imm}]
@@ -472,9 +472,9 @@ A64 Opcodes Table
 |    | 1 1 0 1 0 1 0 1 0 0 0 | 0 0 0 1 1 | 0 | 0 1 0 0 0 | 1 0 0 1 0 | 1 1 1 1 1 | % C6.2.381 TSB CSYNC (TRF)
 |    | s 1 1 1 0 0 1 0 0 N | immr        | imms          | Rn        | 1 1 1 1 1 | % C6.2.382 TST Wn, #imm ; ANDS WZR, Wn, #imm
 |    | s 1 1 0 1 0 1 0 s s 0 | Rm        | imm6          | Rn        | 1 1 1 1 1 | % C6.2.383 TST Wn, Wm{, shift #amount} ; ANDS WZR, Wn, Wm{, shift #amount}
-|    | s 1 0 1 0 0 1 1 0 N | immr        | imms          | Rn        | Rd        | % C6.2.384 UBFIZ Wd, Wn, #lsb, #width ; UBFM Wd, Wn, #(-lsb MOD 32), #(width-1)
+|    | s 1 0 1 0 0 1 1 0 N | immr        | imms          | Rn        | Rd        | % C6.2.384 UBFIZ Wd, Wn, #lsb, #width ; UBFM Wd, Wn, #lsb32, #width
 |    | s 1 0 1 0 0 1 1 0 N | immr        | imms          | Rn        | Rd        | % C6.2.385 UBFM Wd, Wn, #immr, #imms ; UBFM Xd, Xn, #immr, #imms
-|    | s 1 0 1 0 0 1 1 0 N | immr        | imms          | Rn        | Rd        | % C6.2.386 UBFX Wd, Wn, #lsb, #width ; UBFM Wd, Wn, #lsb, #(lsb+width-1)
+|    | s 1 0 1 0 0 1 1 0 N | immr        | imms          | Rn        | Rd        | % C6.2.386 UBFX Wd, Wn, #lsb, #width ; UBFM Wd, Wn, #lsb, #lsbwidth
 |    | 0 0 0 0 0 0 0 0 0 0 0 | 0 0 0 0 0 | imm16                                 | % C6.2.387 UDF #imm
 |    | s 0 0 1 1 0 1 0 1 1 0 | Rm        | 0 | 0 0 0 1 0 | Rn        | Rd        | % C6.2.388 UDIV Wd, Wn, Wm
 |    | 1 0 0 1 1 0 1 1 1 0 1 | Rm        | 0 | Ra        | Rn        | Rd        | % C6.2.389 UMADDL Xd, Wn, Wm, Xa

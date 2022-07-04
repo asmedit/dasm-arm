@@ -18,6 +18,12 @@ SME Instruction Format
 ----------------------
 
 | No |                31-21  | 20-16: Rm | F | 14-10: Ra | 9-5: Rn   | 4-0: Rd   | Description
++----+-----------------------+-----------+---+-----------+-----------+-----------+-------------------
+| 01 | s q x t t t t z a r w | x x x x x | x | y y z z z | a b c d e | f g h i j | % 0-Way PURE:
+| 02 | s q x t t t t z a r w | x x x x x | x | y y z z z | Zn        | a b c d e | % 1-Way REG LEFT:
+| 03 | s q x t t t t z a r w | x x x x x | x | y y z z z | a b c d e | Zd        | % 1-Way REG RIGHT:
+| 04 | s q x t t t t z a r w | Zm        | x | y y z z z | Zn        | a b c d e | % 2-Way REG:
+| 05 | s q x t t t t z a r w | Rn        | x | y y z z | imm6        | Rd        | % 2-Way REG IMM:
 
 SME Opcodes Table
 -----------------

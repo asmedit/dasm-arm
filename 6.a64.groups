@@ -39,6 +39,20 @@ A64 Instruction Format
 
 | No |                31-21  | 20-16: Rm | F | 14-10: Ra | 9-5: Rn   | 4-0: Rd   | Description
 
+|    | s x x t t t t z a r w | x x x x x | x | x x x x x | x x x x x | x x x x x | % 0-way Pure Bits:
+|    | s x x t t t t z a r w | Rm        | x | Ra        | Rn        | Rd        | % 4-way Register Ops:
+|    | s x x t t t t z a r w | Rm        | x | x x x x x | Rn        | Rd        | % 3-way Register Ops:
+|    | s x x t t t t z a r w | Rm        | c | c c c x x | Rn        | x n z c v | % 2-way Register Ops Right:
+|    | s x x t t t t z a r w | x x x x x | x | x Z x x M | Rn        | Rd        | % 2-way Register Ops Left:
+|    | s x x t t t t z a r w | x x o o o | x | x x x x x | x x o o o | Rd        | % 1-way Register Ops:
+|    | s x x t t t t z a r w | Rm        | imm6          | Rn        | Rd        | % 3-way Register Ops with Immediate:
+|    | s x x t t t t z a r | immr        | imms          | Rn        | Rd        | % 2-way Register Ops Right with Complex Immediate:
+|    | s x x t t t t z a r w | imm16                                 | Rd        | % 1-way Register with Big Immediate:
+|    | s x x t t t t z a r w | imm5      | c | c c c 1 0 | Rn        | 0 n z c v | % 1-way Register with Immediate:
+|    | s x x t t t t z a r | imm12                       | Rn        | Rt        | % 2-way Register with Big Immediate:
+|    | s x x t t t t z a r | imm7            | Rt2       | Rn        | Rt        | % 2-way Register with Immediate:
+|    | s x x t t t t z | imm19                                       | Rt        | % 1-way Register with Big Immediate:
+|    | s x x t t t | imm26                                                       | % 0-way Branch:
 
 A64 Opcodes Table
 -----------------
@@ -240,9 +254,6 @@ A64 Opcodes Table
 |    | 0 0 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 0 1 0 0 | Rn        | 1 1 1 1 1 | % C6.2.334 STSMINB/STSMINLB Ws, [Xn|SP] ; LDSMINB/LDSMINLB Ws, WZR, [Xn|SP]
 |    | 0 1 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 0 1 0 0 | Rn        | 1 1 1 1 1 | % C6.2.335 STSMINH/STSMINLH Ws, [Xn|SP] ; LDSMINH/LDSMINLH Ws, WZR, [Xn|SP]
 |    | 1 x 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 0 1 0 0 | Rn        | 1 1 1 1 1 | % C6.2.336 STSMIN/STSMINL Ws, [Xn|SP] ; LDSMIN/LDSMINL Ws, WZR, [Xn|SP]
-|    | 1 x 1 1 1 0 0 0 0 0 0 | imm9                | 1 0 | Rn        | Rt        | % C6.2.337 STTR Wt, [Xn|SP{, #simm}] ; STTR Xt, [Xn|SP{, #simm}]
-|    | 0 0 1 1 1 0 0 0 0 0 0 | imm9                | 1 0 | Rn        | Rt        | % C6.2.338 STTRB Wt, [Xn|SP{, #simm}]
-|    | 0 1 1 1 1 0 0 0 0 0 0 | imm9                | 1 0 | Rn        | Rt        | % C6.2.339 STTRH Wt, [Xn|SP{, #simm}]
 |    | 1 x 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 1 0 0 0 | Rn        | 1 1 1 1 1 | % C6.2.340 STUMAX/STUMAXL Ws, [Xn|SP] ; LDUMAX/LDUMAXL Ws, WZR, [Xn|SP]
 |    | 0 0 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 1 0 0 0 | Rn        | 1 1 1 1 1 | % C6.2.341 STUMAXB/STUMAXLB Ws, [Xn|SP] ; LDUMAXB/LDUMAXLB Ws, WZR, [Xn|SP]
 |    | 0 1 1 1 1 0 0 0 0 R 1 | Rs        | 0 | 1 1 0 0 0 | Rn        | 1 1 1 1 1 | % C6.2.342 STUMAXH/STUMAXLH Ws, [Xn|SP] ; LDUMAXH/LDUMAXLH Ws, WZR, [Xn|SP]
@@ -374,6 +385,9 @@ Big Immediates:
 
 Big Immediates:
 
+|    | 1 x 1 1 1 0 0 0 0 0 0 | imm9                | 1 0 | Rn        | Rt        | % C6.2.337 STTR Wt, [Xn|SP{, #simm}] ; STTR Xt, [Xn|SP{, #simm}]
+|    | 0 0 1 1 1 0 0 0 0 0 0 | imm9                | 1 0 | Rn        | Rt        | % C6.2.338 STTRB Wt, [Xn|SP{, #simm}]
+|    | 0 1 1 1 1 0 0 0 0 0 0 | imm9                | 1 0 | Rn        | Rt        | % C6.2.339 STTRH Wt, [Xn|SP{, #simm}]
 |    | 1 x 1 1 1 0 0 0 0 1 0 | imm9                | 0 1 | Rn        | Rt        | % C6.2.166 LDR Wt, [Xn|SP], #imm
 |    | 1 x 1 1 1 0 0 0 0 1 0 | imm9                | 1 1 | Rn        | Rt        | % C6.2.166 LDR Wt, [Xn|SP, #imm]!
 |    | 0 1 1 1 1 0 0 0 0 1 0 | imm9                | 0 1 | Rn        | Rt        | % C6.2.172 LDRH Wt, [Xn|SP], #simm
@@ -446,6 +460,7 @@ Big Immediates:
 |    | 1 1 0 1 0 1 0 0 0 0 0 | imm16                                 | 0 0 0 0 1 | % C6.2.365 SVC #imm
 |    | 1 1 0 1 0 1 0 0 0 1 1 | imm16                                 | 0 0 0 0 0 | % C6.2.376 TCANCEL #imm
 
+
 Big Immediates:
 
 
@@ -500,6 +515,7 @@ Big Immediates:
 
 |    | 0 0 0 1 0 1 | imm26                                                       | % C6.2.025 B #imm
 |    | 1 0 0 1 0 1 | imm26                                                       | % C6.2.034 BL #imm
+
 
 Pure Bits:
 

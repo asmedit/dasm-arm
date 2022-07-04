@@ -49,9 +49,9 @@ A64 Instruction Format
 |    | s x x t t t t z a r | immr        | imms          | Rn        | Rd        | % 2-way Register Ops Right with Complex Immediate:
 |    | s x x t t t t z a r w | imm16                                 | Rd        | % 1-way Register with Big Immediate:
 |    | s x x t t t t z a r w | imm5      | c | c c c 1 0 | Rn        | 0 n z c v | % 1-way Register with Immediate:
-|    | s x x t t t t z a r | imm12                       | Rn        | Rt        | % 2-way Register with Big Immediate:
-|    | s x x t t t t z a r | imm7            | Rt2       | Rn        | Rt        | % 2-way Register with Immediate:
-|    | s x x t t t t z | imm19                                       | Rt        | % 1-way Register with Big Immediate:
+|    | s x x t t t t z a r | imm12                       | Rn        | Rd        | % 2-way Register with Big Immediate:
+|    | s x x t t t t z a r | imm7            | Ra        | Rn        | Rd        | % 2-way Register with Immediate:
+|    | s x x t t t t z | imm19                                       | Rd        | % 1-way Register with Big Immediate:
 |    | s x x t t t | imm26                                                       | % 0-way Branch:
 
 A64 Opcodes Table
